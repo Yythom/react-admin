@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-
+import { useCallback, useState } from "react";
 import logger from "../utils/js_utils/logger";
 
-function useSearch() {
-    const [search, _setSearch] = useState({})
+function useSearch(initSearch = {})
+    : [Object, (key: string, v: any, flag?: Function | undefined) => void] {
+    const [search, _setSearch] = useState(initSearch)
 
-    function setSearch(key: string, v: any, flag?: Function) {
+    const setSearch = useCallback((key: string, v: any, flag?: Function) => {
         const c = JSON.parse(JSON.stringify(search));
         c[key] = v;
         _setSearch(c)
         logger('search', c)
-    }
+    }, [search])
 
     return [search, setSearch]
 }

@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 import { baseURL, timeout } from './config'
 
-function request(config) {
+function request(config: AxiosRequestConfig) {
     const instance = axios.create({
         baseURL,
         timeout,

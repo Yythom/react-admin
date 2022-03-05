@@ -14,8 +14,9 @@ const DemoComponent = memo(() => {
             test
         </button>
 
-        <div style={{ width: '200px' }}>
-            <ImagesComponent imgList={Array.from(Array(4))} />
+        <div style={{ width: '100px' }}>
+            {/* 层叠布局 */}
+            <ImagesComponent imgList={Array.from(Array(20))} />
         </div>
     </div>
 });

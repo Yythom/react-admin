@@ -53,6 +53,10 @@ button {
     font-weight: bold;
 }
 
+body[theme-mode="dark"] {
+    background: var(--semi-color-nav-bg);
+}
+
 body[theme-mode="dark"] .semi-portal * {
     color: #fff !important;
 }
@@ -63,18 +67,6 @@ body[theme-mode="dark"] .semi-portal * {
 }
 
 
-/* body[theme-mode="dark"] .semi-button-light:not(.semi-button-disabled):hover .semi-button-content {
-    color: #eee !important
-} */
-
-
-body .semi-navigation-item-selected {
-    /* color: #fff; */
-}
-
-body .semi-navigation-item:hover {
-    /* color: #fff !important; */
-}
 
 ul,
 li,
