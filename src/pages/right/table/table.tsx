@@ -33,7 +33,7 @@ const ProTable = memo(() => {
         <div>
             <Pagination total={100} size="small" hoverShowPageSelect onChange={(currentPage) => {
                 console.log(currentPage);
-                setParams('page', currentPage)
+                setParams('page', currentPage) //
             }}></Pagination>
         </div>
         <Table
