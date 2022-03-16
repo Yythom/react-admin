@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import useSearch from "./useSearch";
 
-function useRequest<T, P>(
+function useRequest<T, P = undefined>(
     promise: (data: any) => Promise<any>,
     option: {
         start_owner?: boolean, // 是否手动fetch
@@ -16,7 +16,7 @@ function useRequest<T, P>(
         () => Promise<void>,
         (key: string, v: any) => void,
         boolean,
-        P
+        P | undefined
     ] {
     const [ret, setRet] = useState<T>();
     const [loading, setloading] = useState<boolean>(true);

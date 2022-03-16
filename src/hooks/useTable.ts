@@ -1,10 +1,10 @@
-import useRequest from "../../../hooks/useRequest";
+import useRequest from "./useRequest";
 
-function useTable<T, P>(
+function useTable<T, P = undefined>(
     promise: (data: any) => Promise<any>,
     initParams = {},
 ): {
-    params: P;
+    params: P | undefined;
     setParams: (key: string, v: any) => void;
     tableData: T | undefined;
     fetch: () => Promise<void>;
