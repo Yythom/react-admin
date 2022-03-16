@@ -1,27 +1,33 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
-import useSearch from "../../../hooks/useSearch";
-import ProColums from "./columns";
+import useRequest from "../../../hooks/useRequest";
 
-const useTable = (promise: Function, initParams = {},) => {
-    const [params, setParams] = useSearch(initParams);
-    const [tableData, setTableData] = useState([]);
-
-    const fetch = async () => {
-        const ret = await promise(params);
-        setTableData(ret);
-    };
-
-    useEffect(() => {
-        console.log('params:::::: ', params);
-        if (params) fetch()
-    }, [params])
+function useTable<T, P>(
+    promise: (data: any) => Promise<any>,
+    initParams = {},
+): {
+    params: P;
+    setParams: (key: string, v: any) => void;
+    tableData: T | undefined;
+    fetch: () => Promise<void>;
+    loading: boolean
+} {
+    const [
+        ret,
+        fetch,
+        setParams,
+        loading,
+        params
+    ] = useRequest<T, P>(promise, {
+        initParams,
+    })
 
     return {
         params,
         setParams,
-        tableData
+        tableData: ret,
+        fetch,
+        loading
     }
 }
+
 
 export default useTable;

@@ -12,6 +12,9 @@ class Storage {
         let temp = JSON.stringify({ data: value });
         localStorage.setItem(key, temp);
     }
+    static clear() {
+        localStorage.clear();
+    }
 }
 
 export default Storage;

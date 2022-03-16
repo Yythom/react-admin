@@ -1,18 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useCallback, useState } from "react";
 import logger from "../utils/js_utils/logger";
+import Storage from "../utils/js_utils/storage";
 
-function useSearch(initSearch = {})
-    : [Object, (key: string, v: any, flag?: Function | undefined) => void] {
-    const [search, _setSearch] = useState(initSearch)
+function useSearch<T>(initSearch?: any, is_storage_cache_key?: string): [T, (key: string, v: any) => void] {
+    const [search, _setSearch] = useState<T>(initSearch)
 
-    const setSearch = useCallback((key: string, v: any, flag?: Function) => {
-        const c = JSON.parse(JSON.stringify(search));
+    const setSearch = useCallback((key: string, v: any,) => {
+        const c = JSON.parse(JSON.stringify(search || {}));
         c[key] = v;
         _setSearch(c)
-        logger('search', c)
-    }, [search])
-
+        if (is_storage_cache_key) {
+            Storage.setStorageSync(is_storage_cache_key, c)
+        }
+    }, [search, is_storage_cache_key])
     return [search, setSearch]
 }
 

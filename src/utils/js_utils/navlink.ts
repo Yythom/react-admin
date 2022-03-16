@@ -1,13 +1,16 @@
 
-const navLinkTo = (his, url = '', query = {}) => {
+const navLinkToUrl = (
+    url: string,
+    query?: { [key: string]: string }
+) => {
     let search = '';
-    if (Object.keys(query)[0]) {
+    if (query) {
         search = '?';
         Object.keys(query).forEach((e, i) => {
             search += `${i > 0 ? '&' : ''}${e}=${query[e]}`
         })
     }
     console.log(`/${url}${search}`);
-    his.push({ pathname: `/${url}${search}` });
+    return { pathname: `/${url}${search}` }
 }
-export default navLinkTo;
+export default navLinkToUrl;

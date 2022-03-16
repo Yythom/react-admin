@@ -1,14 +1,14 @@
 import { ConfigProvider, LocaleProvider } from "@douyinfe/semi-ui";
 import { memo } from "react";
-import { shallowEqual, useSelector } from "react-redux";
+import useSlice from "../hooks/useSlice";
+import { GlobalStateInterface } from "../store/global_slice";
 import loacl from "./semi-ui-local";
 
 const LangComponent = memo(({ children }) => {
-    const user = useSelector(state => state.user, shallowEqual);
-
+    const [global_slice] = useSlice<GlobalStateInterface>();
     return (
-        <LocaleProvider locale={loacl[user?.lang]}>
-            <ConfigProvider locale={loacl[user?.lang]}>
+        <LocaleProvider locale={loacl[global_slice.lang]}>
+            <ConfigProvider locale={loacl[global_slice.lang]}>
                 {children}
             </ConfigProvider>
         </LocaleProvider>

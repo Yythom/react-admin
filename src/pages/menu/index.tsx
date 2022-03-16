@@ -2,18 +2,19 @@
 /* eslint-disable no-unused-vars */
 import { useState, memo, useLayoutEffect, useMemo, useEffect } from "react";
 import { useHistory } from 'react-router-dom';
-import './index.scss'
 import navLinkTo from "../../utils/js_utils/navlink";
 import { Nav, } from "@douyinfe/semi-ui";
 import { startInterval, stopInterval } from "../../utils/js_utils/interval";
 import useSlice from "../../hooks/useSlice";
 import { IconSetting, IconTaskMoneyStroked, } from "@douyinfe/semi-icons";
 import Storage from "../../utils/js_utils/storage";
+import { GlobalStateInterface } from "../../store/global_slice";
+import './index.scss'
 
 const Menu = () => {
     const history = useHistory()
     const [collapse, setcollapse] = useState(false);
-    const [global_slice, dispatch] = useSlice();
+    const [global_slice] = useSlice<GlobalStateInterface>();
 
     const [menu, setmenu] = useState(window.location.pathname.split('/')[1] || '');
     const tabs = useMemo(() => {
@@ -54,11 +55,12 @@ const Menu = () => {
                 selectedKeys={[menu]}
                 style={{ height: '100%', border: 'none' }}
                 items={tabs}
-                onClick={(el) => {
+                onClick={(el: any) => {
                     if (!el?.openKeys) {
                         stopInterval() // 重置全局轮训
                         setmenu(el.itemKey)
-                        navLinkTo(history, el.itemKey)
+                        history.push(navLinkTo(el.itemKey))
+
                     } else {
                         Storage.setStorageSync('openKeys', el.openKeys);
                     }

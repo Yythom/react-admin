@@ -14,13 +14,13 @@ import Login from "./pages/login";
 import Logo from "./global-component/logo";
 import DemoComponent from "./pages/right/demo/demo";
 import CacheRoute from "react-router-cache-route";
-import { actions } from "./store/global_slice";
+import { actions, GlobalStateInterface } from "./store/global_slice";
 import useSlice from "./hooks/useSlice";
 import ProTable from "./pages/right/table/table";
 
 const { Header, Sider, Content } = Layout;
 const App = () => {
-  const [global_slice, dispatch] = useSlice();
+  const [global_slice, dispatch] = useSlice<GlobalStateInterface>();
   useMemo(() => {
     intl.init({
       warningHandler: (msg, detail) => {

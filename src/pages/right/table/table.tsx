@@ -1,6 +1,7 @@
 import { Pagination, Table } from "@douyinfe/semi-ui";
 import { memo, useMemo } from "react";
-import { get_table_data, } from "../../../services/test";
+import { get_table_data, } from "../../../services/test/test";
+import { TablItemInterface } from "../../../services/test/testInterface";
 import ProColums from "./columns";
 import './style.scss'
 import useTable from "./useTable";
@@ -10,7 +11,7 @@ const ProTable = memo(() => {
         params, // 不需要关注
         setParams,
         tableData
-    } = useTable(get_table_data, { page: 1, pageSize: 11 })
+    } = useTable<TablItemInterface[], any>(get_table_data, { page: 1, pageSize: 11 })
 
     const columns = useMemo(() => {
         return [
