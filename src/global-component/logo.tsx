@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-import { Avatar } from "@douyinfe/semi-ui";
 import Text from "@douyinfe/semi-ui/lib/es/typography/text";
 import { memo } from "react";
 
@@ -12,7 +10,7 @@ const Logo = memo(() => {
             <Text>
                 <h1 style={{ fontSize: '24px', fontStyle: 'normal' }}>
                     <a href={window.location.origin} style={{ color: 'inherit', fontSize: '45px' }}>
-                        Page
+                        logo
                     </a>
                 </h1>
             </Text>

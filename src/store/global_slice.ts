@@ -1,16 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { get_table_data } from '../services/test/test';
+import { get_menu_route, RouteItemInterface } from '../pages/route';
 type mode = 'light' | 'dark' | string
 type lang = 'zh_CN' | 'en_US' | string
 
 export interface GlobalStateInterface {
     mode: mode,
     lang: lang,
+    user_route: RouteItemInterface[]
 }
 
 const initialState = {
     mode: 'light',
-    lang: 'zh_CN'
+    lang: 'zh_CN',
+    user_route: []
 }
 
 const reducers = {
@@ -20,17 +22,14 @@ const reducers = {
 }
 
 // 登入
-const globalAsync = createAsyncThunk(
-    'user/globalAsync',
-    async (data, thunkAPI) => { // data 微信获取到的信息
-        console.log(data, '异步接收到的data');
-        let result;
-        let res = await get_table_data();
-        console.log(res);
+const getMenuRouteAsync = createAsyncThunk(
+    'global/get_menu_route',
+    async (cb?: Function, thunkAPI?: any) => { // data 微信获取到的信息
+        let res = await get_menu_route();
         if (res) {
-            result = res
+            cb && cb()
+            return res
         }
-        return result
     }
 )
 
@@ -39,21 +38,19 @@ const globalAsync = createAsyncThunk(
  * 监听异步完成处理state
  */
 const extraReducers = {  // 两种写法
-    [`${globalAsync.fulfilled}`](state: GlobalStateInterface, action: any) {
-        // console.log(action.payload, 'state接受到的payload');
-        // state.userInfo = action.payload
+    [`${getMenuRouteAsync.fulfilled}`](state: GlobalStateInterface, action: any) {
+        state.user_route = action.payload
     },
 }
 const Slice = createSlice({
     name: 'global_slice',
     initialState,
     reducers,
-    // extraReducers,
+    extraReducers,
 })
-
 
 export const actions = {
     ...Slice.actions,
-    globalAsync,
+    getMenuRouteAsync,
 };
 export default Slice.reducer;

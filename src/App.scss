@@ -1,40 +1,16 @@
-// @import '../theme/scss/index.scss';
-
 @font-face {
   font-family: "solana";
   /* Project id 2286649 */
   src: url("./font/PlusJakartaDisplay-Regular.woff2") format("woff2"),
 }
 
-@font-face {
-  font-family: "solana-medium";
-  /* Project id 2286649 */
-  src: url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/src/plus-jakarta-display/PlusJakartaDisplay-Medium.woff2") format("woff2"),
-}
-
-@font-face {
-  font-family: "solana-bold";
-  /* Project id 2286649 */
-  src: url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/src/plus-jakarta-display/PlusJakartaDisplay-Bold.woff2") format("woff2"),
-}
-
-.hover {
-  cursor: pointer;
-
-  &:hover {
-    background: #eee;
-  }
-}
-
 * {
   scrollbar-width: none;
+  font-family: solana !important;
 
   &::-webkit-scrollbar {
     display: none;
-    /* Chrome Safari */
   }
-
-  font-family: solana !important;
 }
 
 .semi-card {
@@ -45,40 +21,57 @@
   font-weight: bold;
 }
 
-.App {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+body[theme-mode="dark"] {
+  .main {
+    border-left: #3d3e3f9b solid 1px;
+    background: var(--semi-color-nav-bg) !important;
+  }
 
-  header {
-    // display: none;
-    height: 112px;
+  .header {
+    border-bottom: #3d3e3f9b solid 1px !important;
+  }
+}
+
+.App {
+  .header {
+    height: 8rem;
+    box-sizing: border-box;
+    padding: 1rem;
+    border-bottom: 1px solid rgb(224, 224, 224);
 
     .head-item {
       margin-left: 10px;
     }
   }
 
+  .page {
+    height: calc(100% - 8rem);
+
+    .menu,
+    .main {
+      height: 100%;
+    }
+
+    .main {
+      padding: 1rem;
+      box-sizing: border-box;
+      flex: 1;
+      background-color: #F4F6F8;
+    }
+  }
 
 
 
-
-}
-
-
-
-img {
-  border-radius: 8px;
 }
 
 .card {
   border: 1px solid #eee;
   padding: 17px;
   // padding-top: 0;
-  border-radius: 20px;
+  border-radius: 1rem;
   box-sizing: border-box;
   position: relative;
+  background: #fff;
 
   .item {
     font-size: 14px;
@@ -114,7 +107,7 @@ body[theme-mode="dark"] {
   background-color: #3772ff;
   padding: 16px 24px;
   font-size: 16px;
-  color: #fcfcfd;
+  color: #fcfcfd !important;
   font-weight: bold;
   border-radius: 90px;
   text-align: center;
@@ -122,6 +115,7 @@ body[theme-mode="dark"] {
   transition: 400ms;
 
   &:hover {
+    color: #fcfcfd !important;
     background: #044eff;
   }
 }

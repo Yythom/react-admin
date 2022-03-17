@@ -1,87 +1,82 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
-import { useState, memo, useLayoutEffect, useMemo, useEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
-import navLinkTo from "../../utils/js_utils/navlink";
 import { Nav, } from "@douyinfe/semi-ui";
-import { startInterval, stopInterval } from "../../utils/js_utils/interval";
+import { stopInterval } from "../../utils/js_utils/interval";
 import useSlice from "../../hooks/useSlice";
-import { IconSetting, IconTaskMoneyStroked, } from "@douyinfe/semi-icons";
 import Storage from "../../utils/js_utils/storage";
-import { GlobalStateInterface } from "../../store/global_slice";
+import { actions, GlobalStateInterface } from "../../store/global_slice";
 import './index.scss'
+import { basePath, } from "../route";
+import Icon from "../../global-component/icon";
 
 const Menu = () => {
     const history = useHistory()
-    const [collapse, setcollapse] = useState(false);
-    const [global_slice] = useSlice<GlobalStateInterface>();
+    const [global_slice, dispatch] = useSlice<GlobalStateInterface>();
+    const path = history.location.pathname.split('/').join('/').replace(basePath, '');
+    const [menu, setmenu] = useState(path || '');
 
-    const [menu, setmenu] = useState(window.location.pathname.split('/')[1] || '');
-    const tabs = useMemo(() => {
-        if (!global_slice?.mode) return
-        return [
-            {
-                text: '系统',
-                icon: <IconSetting />,
-                itemKey: 'System',
-                isOpen: true,
-
-                items: [{
-                    itemKey: 'demo', //地址本 
-                    text: '测试',
-                },],
-            },
-            {
-                text: '表单',
-                icon: <IconTaskMoneyStroked />,
-                itemKey: 'table',
-            },
-        ]
-    }, [global_slice?.mode, menu])
-
-    // useLayoutEffect(() => {
-    //     if (!getStorageSync('userinfo')) {
-    //         history.replace('/')
-    //     } 
-    //     // setmenu(itemkey)
-    // }, []); 
-    if (!global_slice?.mode) return null
-
+    useLayoutEffect(() => {
+        dispatch(actions.getMenuRouteAsync())
+    }, [])
     return (
-        <div className="menu fdc">
+        <div className="fdc" style={{ height: '100%' }}>
             <Nav
-                className='menu'
                 defaultOpenKeys={Storage.getStorageSync('openKeys') || []}
                 selectedKeys={[menu]}
                 style={{ height: '100%', border: 'none' }}
-                items={tabs}
                 onClick={(el: any) => {
                     if (!el?.openKeys) {
                         stopInterval() // 重置全局轮训
                         setmenu(el.itemKey)
-                        history.push(navLinkTo(el.itemKey))
-
+                        history.push(basePath + el.itemKey)
                     } else {
                         Storage.setStorageSync('openKeys', el.openKeys);
                     }
                 }}
-                onCollapseChange={(e) => {
-                    setcollapse(e)
+                footer={{
+                    collapseButton: true,
                 }}
-                header={{
-                    logo: <div>
-                        {/* <div className='flex'>
-                            <img className='logo' src="//lf1-cdn-tos.bytescm.com/obj/ttfe/ies/semi/webcast_logo.svg" />
-                            {!collapse && <div style={{ fontSize: '20px', fontWeight: 'bold' }}>name</div>}
-                        </div> */}
-                        {/* <Logo /> */}
-                        {/* <Card className='user fc' >
-                            <ConnectWallets network="Solana" />
-                        </Card> */}
-                    </div >,
-                }}
-
-            />
+            >
+                <Nav.Header
+                    // eslint-disable-next-line jsx-a11y/alt-text
+                    logo={<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F07%2Faa%2F5b%2F07aa5bb71261cba6540c1b750dac7690.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1650087669&t=a8692e46abf591e4ac3bddb972e17172" />}
+                    text={'admin'}
+                />
+                {
+                    global_slice.user_route.map(item => {
+                        if (item.items) {
+                            return <Nav.Sub
+                                key={item.itemKey}
+                                itemKey={item.itemKey}
+                                text={item.text}
+                                icon={<Icon icon={item.icon} />}
+                            >
+                                {item.items.map(child =>
+                                    <Nav.Item
+                                        style={{
+                                            width: 'calc(100% - 5rem)',
+                                            marginLeft: '3rem'
+                                        }}
+                                        key={child.itemKey}
+                                        itemKey={child.itemKey}
+                                        text={child.text}
+                                        icon={<Icon icon={child.icon} />}
+                                    />
+                                )}
+                            </Nav.Sub>
+                        } else {
+                            return <Nav.Item
+                                key={item.itemKey}
+                                itemKey={item.itemKey}
+                                text={item.text}
+                                icon={<Icon icon={item.icon} />}
+                            />
+                        }
+                    })
+                }
+            </Nav>
         </div >
 
     );

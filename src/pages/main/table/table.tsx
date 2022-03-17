@@ -8,7 +8,6 @@ import useTable from "../../../hooks/useTable";
 
 const ProTable = memo(() => {
     const {
-        params, // 不需要关注
         setParams,
         tableData
     } = useTable<TablItemInterface[]>(get_table_data, { page: 1, pageSize: 11 })
@@ -30,18 +29,19 @@ const ProTable = memo(() => {
         ]
     }, []);
 
-    return <div className="pro_table">
+    return <div className="pro_table card">
+
+        <Table
+            pagination={false}
+            dataSource={tableData}
+            columns={columns}
+        ></Table>
         <div>
             <Pagination total={100} size="small" hoverShowPageSelect onChange={(currentPage) => {
                 console.log(currentPage);
                 setParams('page', currentPage) //
             }}></Pagination>
         </div>
-        <Table
-            pagination={false}
-            dataSource={tableData}
-            columns={columns}
-        ></Table>
     </div>
 
 })

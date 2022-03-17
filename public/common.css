@@ -73,14 +73,17 @@ li,
 div,
 body,
 html,
-span {
+span,
+p {
     margin: 0;
     padding: 0;
 }
 
 #root,
 body,
-html {
+html,
+.App,
+.page {
     width: 100%;
     height: 100%;
 }

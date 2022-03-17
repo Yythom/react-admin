@@ -1,4 +1,4 @@
-import { ColumnProps, ColumnRender } from "@douyinfe/semi-ui/lib/es/table";
+import { ColumnProps, } from "@douyinfe/semi-ui/lib/es/table";
 
 class ProColums {
     static create(

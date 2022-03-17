@@ -19,7 +19,7 @@ function useRequest<T, P = undefined>(
         P | undefined
     ] {
     const [ret, setRet] = useState<T>();
-    const [loading, setloading] = useState<boolean>(true);
+    const [loading, setloading] = useState<boolean>(false);
     const [params, setParams] = useSearch<P>(option.initParams);
 
     const fetch = useCallback(async (_params?) => {

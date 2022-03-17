@@ -11,6 +11,6 @@ const navLinkToUrl = (
         })
     }
     console.log(`/${url}${search}`);
-    return { pathname: `/${url}${search}` }
+    return `/${url}${search}`
 }
 export default navLinkToUrl;
