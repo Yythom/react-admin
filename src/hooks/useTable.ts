@@ -1,8 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useLayoutEffect } from "react";
 import useRequest from "./useRequest";
 
 function useTable<T, P = undefined>(
     promise: (data: any) => Promise<any>,
-    initParams = {},
+    option: {
+        start_owner?: boolean,
+        initParams: {},
+    },
 ): {
     params: P | undefined;
     setParams: (key: string, v: any) => void;
@@ -17,8 +22,13 @@ function useTable<T, P = undefined>(
         loading,
         params
     ] = useRequest<T, P>(promise, {
-        initParams,
+        initParams: option?.initParams,
+        start_owner: option?.start_owner,
     })
+
+    useLayoutEffect(() => {
+        fetch()
+    }, [])
 
     return {
         params,

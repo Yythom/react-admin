@@ -20,8 +20,13 @@ function useRequest<T, P = undefined>(
     ] {
     const [ret, setRet] = useState<T>();
     const [loading, setloading] = useState<boolean>(false);
-    const [params, setParams] = useSearch<P>(option.initParams);
-
+    const [params, setParams] = useSearch<P>(option.initParams, {
+        callback: (k, v) => {
+            if (k === 'page' || k === 'pageSize') {
+                fetch({ ...params, [k]: v })
+            }
+        }
+    });
     const fetch = useCallback(async (_params?) => {
         !loading && setloading(true);
         const res = await promise(_params || params);
