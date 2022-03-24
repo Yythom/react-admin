@@ -4,17 +4,17 @@ import {
   BrowserRouter as Router,
   Route,
 } from "react-router-dom";
-import Menu from "./pages/menu";
+import Menu from "@/pages/menu";
 import intl from 'react-intl-universal'
-import zh_CN from './lang/zh_CN'
-import en_US from './lang/en_US'
-import Login from "./pages/login";
-import Logo from "./global-component/logo";
-import { GlobalStateInterface } from "./store/global_slice";
-import useSlice from "./hooks/useSlice";
-import ThemeMode from "./global-component/theme_mode";
-import RouteComponentsMap from "./pages/route";
-import ProBreadcrumb from "./global-component/pro_breadcrumb";
+import zh_CN from '@/lang/zh_CN'
+import en_US from '@/lang/en_US'
+import Login from "@/pages/login";
+import Logo from "@/global-component/logo";
+import { GlobalStateInterface } from "@/store/global_slice";
+import useSlice from "@/hooks/useSlice";
+import ThemeMode from "@/global-component/theme_mode";
+import RouteComponentsMap from "@/pages/route";
+import ProBreadcrumb from "@/global-component/pro_breadcrumb";
 const header = memo(() =>
   <div className="header fb">
     <Logo />
