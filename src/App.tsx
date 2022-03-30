@@ -13,7 +13,7 @@ import Logo from "@/global-component/logo";
 import { GlobalStateInterface } from "@/store/global_slice";
 import useSlice from "@/hooks/useSlice";
 import ThemeMode from "@/global-component/theme_mode";
-import RouteComponentsMap from "@/pages/route";
+import RouteComponentsMap, { basePath } from "@/pages/route";
 import ProBreadcrumb from "@/global-component/pro_breadcrumb";
 const header = memo(() =>
   <div className="header fb">
@@ -42,14 +42,14 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        <Route path='/main' component={header} />
+        <Route path={basePath} component={header} />
         <div className="page flex">
           <div className="menu">
-            <Route path='/main' component={Menu} />
+            <Route path={basePath} component={Menu} />
           </div>
           <div className="main">
             <Route path='/' exact component={Login} />
-            <Route path='/main' component={ProBreadcrumb} />
+            <Route path={basePath} component={ProBreadcrumb} />
             {
               global_slice.user_route.map(e => {
                 return <Fragment key={e.itemKey}>
