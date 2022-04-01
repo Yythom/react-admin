@@ -14,7 +14,7 @@ function useRequest<T, P = undefined>(
 ): [
         T | undefined,
         () => Promise<void>,
-        (key: string, v: any) => void,
+        (key: string | P, v?: any) => void,
         boolean,
         P | undefined
     ] {

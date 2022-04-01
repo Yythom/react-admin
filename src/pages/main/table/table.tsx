@@ -66,7 +66,7 @@ const ProTable = memo(() => {
             //     default:
             //         break;
             // }
-            console.log(dataIndex, 'dataIndex');
+            console.log(dataIndex, sorter,);
             setParams('sortField', sort);
         }
     };
