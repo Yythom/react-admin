@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 import DemoComponent from "../main/demo/demo";
 import ProTable from "../main/table/table";
-export const basePath = '/main/';
+export const basePath = '/index/';
 
 const setPagePath = (_path: string) => {
     return `${basePath}${_path}`
