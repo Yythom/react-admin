@@ -47,8 +47,8 @@ const App = () => {
           <div className="menu">
             <Route path={basePath} component={Menu} />
           </div>
+          <Route path='/' exact component={Login} />
           <div className="main">
-            <Route path='/' exact component={Login} />
             <Route path={basePath} component={ProBreadcrumb} />
             {
               global_slice.user_route.map(e => {

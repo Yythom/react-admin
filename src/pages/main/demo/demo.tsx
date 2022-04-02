@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import ProEchart from "@/components/echart/pro_echart";
 import { memo, useState } from "react";
 import './index.scss'
 import OssUpload from "./oss/oss_upload";
@@ -15,14 +16,7 @@ const DemoComponent = memo(() => {
             <OssUpload />
             {/* 层叠布局 */}
             {/* <ImagesComponent imgList={Array.from(Array(20))} /> */}
-            <div className="select"  >
-                下拉
-                <div className="float fd">
-                    <span>aaa</span>
-                    <span>aaa</span>
-                    <span>aaa</span>
-                </div>
-            </div>
+
 
             <div className="swiper">
                 <span onClick={() => move(index - 1)}>{'<'}</span>
@@ -33,7 +27,19 @@ const DemoComponent = memo(() => {
                     )
                 }
             </div>
-
+            <ProEchart
+                classname='test'
+                option={{
+                    x_option: {
+                        name: 'X',
+                        data: [1, 2, 3, 4, 5, 6, 7],
+                    },
+                    y_option: {
+                        name: 'Y'
+                    },
+                    dataSource: [140, 232, 101, 264, 90, 340, 250],
+                }}
+            />
         </div>
     </div>
 });
