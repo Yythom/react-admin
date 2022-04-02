@@ -1,9 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import ProEchart from "@/components/echart/pro_echart";
 import { memo, useState } from "react";
+import Player from 'griffith'
 import './index.scss'
 import OssUpload from "./oss/oss_upload";
-
+const sources = {
+    hd: {
+        play_url: 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_hd.mp4',
+    },
+    sd: {
+        play_url: 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_sd.mp4',
+    },
+}
 const arr = [1, 2, 3, 4]
 const DemoComponent = memo(() => {
     const [index, setIndex] = useState(0);
@@ -40,6 +48,13 @@ const DemoComponent = memo(() => {
                     dataSource: [140, 232, 101, 264, 90, 340, 250],
                 }}
             />
+
+            <div style={{
+                width: '80rem',
+                height: '30rem'
+            }}>
+                <Player sources={sources} id={""} />
+            </div>
         </div>
     </div>
 });

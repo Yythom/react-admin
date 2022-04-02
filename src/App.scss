@@ -46,11 +46,12 @@ body[theme-mode="dark"] {
 
   .page {
     height: calc(100% - 8rem);
-    overflow-y: scroll;
+
 
     .menu,
     .main {
-      height: 100%
+      height: 100%;
+      overflow-y: scroll;
     }
 
     .main {

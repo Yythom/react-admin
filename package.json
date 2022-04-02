@@ -18,6 +18,7 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.10.7",
     "echarts": "^5.3.2",
+    "griffith": "^1.24.3",
     "node-sass": "^6.0.0",
     "number-precision": "^1.5.1",
     "react": "^17.0.0",
