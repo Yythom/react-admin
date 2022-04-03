@@ -26,10 +26,6 @@ function useTable<T, P = undefined>(
         start_owner: option?.start_owner,
     })
 
-    useLayoutEffect(() => {
-        fetch()
-    }, [])
-
     return {
         params,
         setParams,
