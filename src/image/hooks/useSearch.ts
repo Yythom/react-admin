@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import Storage from "@/utils/js_utils/storage";
 import { useCallback, useState } from "react";
-import logger from "../utils/js_utils/logger";
-import Storage from "../utils/js_utils/storage";
 
 function useSearch<T>(
     initSearch?: any,
