@@ -46,7 +46,7 @@ const Login = () => {
                 <Button
                     loading={loading}
                     className="btn"
-                    onClick={login}
+                    onClick={() => login()}
                 >
                     登录
                 </Button>
