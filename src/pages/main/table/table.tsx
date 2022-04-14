@@ -22,8 +22,6 @@ const ProTable = memo(() => {
                 initParams: {
                     page: 1,
                     pageSize: 8,
-                    sortField: 'desc',
-                    search: ''
                 },
                 start_owner: true
             }
