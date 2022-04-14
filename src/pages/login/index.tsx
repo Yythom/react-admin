@@ -8,25 +8,32 @@ import './index.scss'
 import useSlice from "../../hooks/useSlice";
 import { actions, GlobalStateInterface } from "../../store/global_slice";
 import useRequest from "../../hooks/useRequest";
-import LoginService from "../../services/login/login";
 import { Button, Input } from "@douyinfe/semi-ui";
 import { basePath } from "../route";
 import Logo from "../../global-component/logo";
+import { useEffect } from "react";
+import sha1 from 'sha1';
+import { postApiV1AdminProfileLogin, PostApiV1AdminProfileLoginOption, PostApiV1AdminProfileLoginResponseSuccess, ProfileLoginRequest, ProfileLoginResponse } from "@/service/demo";
 
 const Login = () => {
     stopInterval()
     const [global_slice, dispatch] = useSlice<GlobalStateInterface>();
     const history = useHistory()
-    const [ret, login, setParams, loading, params] = useRequest<any, any>(
-        LoginService.login,
-        {
-            start_owner: true,
-            initParams: false,
-            callback: (data: any) => {
-                history.replace(basePath);
-                // Storage.setStorageSync('token', data?.token)
-            }
-        });
+
+    const [ret, login, setParams, loading, params] = useRequest
+        <ProfileLoginResponse, ProfileLoginRequest>
+        (
+            postApiV1AdminProfileLogin,
+            {
+                start_owner: true,
+                initParams: false,
+                callback: (data: any) => {
+                    // history.replace(basePat
+
+                    // Storage.setStorageSync('token', data?.token)
+                }
+            })
+        ;
 
     return (
         <div className='login fdc'>

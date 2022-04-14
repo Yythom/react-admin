@@ -1,7 +1,6 @@
 import { Button, Input, Pagination, Table } from "@douyinfe/semi-ui";
 import { memo, useMemo } from "react";
-import { get_table_data, } from "../../../services/test/test";
-import { TablItemInterface } from "../../../services/test/testInterface";
+
 import ProColums from "./columns";
 import useTable from "../../../hooks/useTable";
 import './style.scss'
@@ -13,12 +12,12 @@ const ProTable = memo(() => {
         params,
         fetch,
         tableData
-    } = useTable<TablItemInterface[],
+    } = useTable<any,
         {
             sortField: string,
             search: string
         }>(
-            get_table_data,
+            async () => { },
             {
                 initParams: {
                     page: 1,

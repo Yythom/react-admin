@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 import Storage from '../../utils/js_utils/storage'
 import { baseURL, timeout } from './config'
 
-function request<T>(config: AxiosRequestConfig): Promise<T | undefined> {
+function request<T>(url: string, config: AxiosRequestConfig): Promise<T | undefined> {
     const instance = axios.create({
         baseURL,
         timeout,
@@ -33,7 +33,7 @@ function request<T>(config: AxiosRequestConfig): Promise<T | undefined> {
 
     // 此处封装一层捕捉错误
     return new Promise((resolve, reject) => {
-        instance(config).then((res: any) => {
+        instance({ url, ...config }).then((res: any) => {
             if (res) {
                 let opts = {
                     content: res?.msg,

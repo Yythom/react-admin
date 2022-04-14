@@ -29,6 +29,7 @@
     "react-scripts": "4.0.3",
     "redux": "^4.1.2",
     "sass": "^1.50.0",
+    "sha1": "^1.1.1",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1",
     "webpackbar": "^5.0.2"
@@ -48,7 +49,8 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
-    "craco-alias": "^3.0.1"
+    "craco-alias": "^3.0.1",
+    "ts-gear": "^4.7.1"
   },
   "browserslist": {
     "production": [

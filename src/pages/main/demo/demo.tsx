@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import ProEchart from "@/components/echart/pro_echart";
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import './index.scss'
 import OssUpload from "./oss/oss_upload";
 
@@ -11,6 +11,7 @@ const DemoComponent = memo(() => {
     function move(i: number) {
         i > arr.length - 1 ? setIndex(0) : i < 0 ? setIndex(arr.length - 1) : setIndex(i)
     }
+
     return <div>
         <div style={{ width: '100px' }}>
             <OssUpload />
