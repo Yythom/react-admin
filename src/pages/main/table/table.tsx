@@ -29,6 +29,12 @@ const ProTable = memo(() => {
                 start_owner: true
             }
         )
+
+    // const { isLoading, data: tableData } = useQuery<TablItemInterface[] | undefined>(['table', params], (p) => {
+    //     const params: any = p.queryKey[1]
+    //     return get_table_data(params)
+    // });
+
     const columns = useMemo(() => {
         return [
             ProColums.create(
