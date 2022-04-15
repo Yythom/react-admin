@@ -18,7 +18,6 @@ const DemoComponent = memo(() => {
             {/* 层叠布局 */}
             {/* <ImagesComponent imgList={Array.from(Array(20))} /> */}
 
-
             <div className="swiper">
                 <span onClick={() => move(index - 1)}>{'<'}</span>
                 <span onClick={() => move(index + 1)}>{'>'}</span>
