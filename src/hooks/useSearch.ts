@@ -6,12 +6,12 @@ function useSearch<T>(
     initSearch?: any,
     option?: {
         is_storage_cache_key?: string,
-        callback: (key: string | T, v: any) => void
+        callback: (key: T | keyof T, v: any) => void
     }
-): [T, (key: string | T, v: any) => void] {
+): [T, (key: T | keyof T, v: any) => void] {
     const [search, _setSearch] = useState<T>(initSearch)
 
-    const setSearch = useCallback((key: string | T, v?: any,) => {
+    const setSearch = useCallback((key: T | keyof T, v?: any,) => {
         if (typeof key === 'object') {
             _setSearch(key);
         } else {

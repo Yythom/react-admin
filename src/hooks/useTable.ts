@@ -16,7 +16,7 @@ function useTable<T, P = undefined>(
     },
 ): {
     params: P | undefined;
-    setParams: (key: string | P, v?: any) => void;
+    setParams: (key: P | keyof P, v?: any) => void;
     tableData: T | undefined;
     fetch: () => Promise<void>;
     loading: boolean

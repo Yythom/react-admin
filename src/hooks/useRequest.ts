@@ -9,12 +9,12 @@ function useRequest<T, P = undefined>(
         callback?: (data: T) => void,
         failCallBack?: () => void,
         initParams?: Object,
-        listen_params?: Object, // 监听模式需要控制变量useMemo
+        listen_params?: P, // 监听模式需要控制变量useMemo
     }
 ): [
         T | undefined,
-        () => Promise<void>,
-        (key: string | P, v?: any) => void,
+        (_params?: P) => Promise<void>,
+        (key: P | keyof P, v?: any) => void,
         boolean,
         P | undefined
     ] {
@@ -27,9 +27,9 @@ function useRequest<T, P = undefined>(
             }
         }
     });
-    const fetch = useCallback(async (_params?) => {
+    const fetch = useCallback(async (_params?: P) => {
         !loading && setloading(true);
-        const res = await promise(_params || params);
+        const res = await promise({ body: _params || params });
         setloading(false);
         if (res) {
             setRet(res);
