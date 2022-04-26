@@ -1,0 +1,26 @@
+.InsetFrom {
+    .semi-form-field-label-text {
+        margin-bottom: 1rem;
+    }
+
+    .semi-input-wrapper {
+        width: 25rem;
+    }
+
+    .button-group {
+
+        .semi-button {
+            margin-right: 1rem;
+
+            &:nth-last-of-type(1) {
+                margin: 0;
+            }
+        }
+    }
+}
+
+.semi-modal-body {
+    .button-group {
+        margin-bottom: 2rem;
+    }
+}

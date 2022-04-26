@@ -1,0 +1,178 @@
+@font-face {
+  font-family: "solana";
+  /* Project id 2286649 */
+  src: url("./font/PlusJakartaDisplay-Regular.woff2") format("woff2"),
+}
+
+* {
+  // scrollbar-width: none;
+  font-family: solana !important;
+
+
+}
+
+.menu {
+  &::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  *::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+
+
+
+.semi-card {
+  border-radius: 20px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+body[theme-mode="dark"] {
+  .main {
+    border-left: #3d3e3f9b solid 1px;
+    background: var(--semi-color-nav-bg) !important;
+  }
+
+  .header {
+    border-bottom: #3d3e3f9b solid 1px !important;
+  }
+}
+
+.semi-button {
+  &:hover {
+    background: none;
+    opacity: .6;
+  }
+}
+
+.App {
+  .header {
+    height: 8rem;
+    box-sizing: border-box;
+    padding: 1rem;
+    border-bottom: 1px solid rgb(224, 224, 224);
+
+    .head-item {
+      margin-left: 10px;
+    }
+  }
+
+  .page {
+    height: calc(100% - 8rem);
+
+    .menu,
+    .main {
+      height: 100%;
+      overflow-y: scroll;
+    }
+
+    .main {
+      padding: 1rem;
+      box-sizing: border-box;
+      flex: 1;
+      background-color: #F4F6F8;
+    }
+  }
+}
+
+.card {
+  border: 1px solid #eee;
+  padding: 17px;
+  // padding-top: 0;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  position: relative;
+  background: #fff;
+
+  .item {
+    font-size: 14px;
+    margin-bottom: 13px;
+    color: var(--text-color);
+
+    * {
+      color: rgb(134, 134, 134);
+    }
+  }
+}
+
+body[theme-mode="dark"] {
+  .card {
+    border: none;
+    background: #21252E;
+    color: #fff;
+  }
+
+
+  .link {
+    cursor: pointer;
+
+    &:hover {
+      transition: 300ms;
+      color: rgb(108, 106, 250);
+    }
+  }
+}
+
+.semi-page {
+  margin-top: 1rem;
+}
+
+.modal-content {
+  padding-bottom: 2rem;
+}
+
+.semi-modal {
+  width: max-content !important;
+  min-width: 500px;
+}
+
+.search-input-group {
+  .semi-input-wrapper {
+    margin: 1rem;
+
+    &:nth-of-type(1) {
+      margin-left: 0;
+    }
+
+    &:nth-last-of-type(1) {
+      margin-right: 0;
+    }
+  }
+}
+
+.modal-footer {}
+
+.pro_table {
+  margin-top: 1rem;
+}
+
+.btn {
+  background-color: #3772ff;
+  padding: 16px 24px;
+  font-size: 16px;
+  color: #fcfcfd !important;
+  font-weight: bold;
+  border-radius: 90px;
+  text-align: center;
+  cursor: pointer;
+  transition: 400ms;
+
+  &:hover {
+    color: #fcfcfd !important;
+    background: #044eff;
+  }
+}
+
+.app-quit {
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+
+  >span {
+    font-size: 18px;
+  }
+}
