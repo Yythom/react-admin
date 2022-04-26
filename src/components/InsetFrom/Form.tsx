@@ -16,6 +16,9 @@ import InsetFromInterface from './interface';
 //     }
 // ]
 // fetch={(v, reset) => reset ? initFetch() : fetch({ ...params, search: v })}
+/**    
+ * fetch={(v: any, reset) => reset ? initFetch() : fetch({ ...params, search: v })}
+ */
 const InsetFrom = memo(({
     fields,
     fetch,
