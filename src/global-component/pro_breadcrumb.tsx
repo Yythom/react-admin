@@ -8,53 +8,44 @@ import { GlobalStateInterface } from "../store/global_slice";
 const ProBreadcrumb = memo(() => {
     const history = useHistory();
     const [global] = useSlice<GlobalStateInterface>();
-    const path = history.location.pathname.split('/').join('/').replace(basePath, '');
+    const path = history.location.pathname.split('/').join('/').replace(basePath, '').split('/');
 
     const bread: RouteItemInterface[] = useMemo(() => {
         const BreadcrumbArray: RouteItemInterface[] = []
-        path && global.user_route.forEach(e => {
-            if (e.items) {
-                e.items.forEach(child => {
-                    if (child.itemKey.indexOf(path) !== -1) {
-                        BreadcrumbArray.push(e)
+        if (path) {
+            if (path[0]) {
+                global.user_route.forEach(e => {
+                    if (e.itemKey.includes(path[0])) {
+                        BreadcrumbArray.push(e);
+                        if (path[1]) {
+                            e.items?.forEach(child => {
+                                if (child.itemKey.includes(path.join('/'))) {
+                                    BreadcrumbArray.push(child);
+                                }
+                            })
+                        }
                     }
                 })
-            } else if (e.itemKey.indexOf(path) !== -1) {
-                BreadcrumbArray.push(e)
             }
-        })
+        }
         return BreadcrumbArray
     }, [path, global?.user_route])
 
-    return <div className="card">
+    return <div className="card" style={{ marginBottom: '1rem' }} >
         <Breadcrumb>
-            <Breadcrumb.Item
-                onClick={() => {
-                    history.replace(basePath)
-                }}
-            >主页</Breadcrumb.Item>
+            <Breadcrumb.Item onClick={() => { localStorage.removeItem('openKeys'); window.location.href = window.location.origin + '/index'; }}   >
+                主页
+            </Breadcrumb.Item>
             {
                 bread.map(e => (
-                    e.items ?
-                        e.items.map(
-                            child =>
-                                <Breadcrumb.Item
-                                    key={e.itemKey}
-                                    onClick={() => {
-                                        history.replace(basePath + child.itemKey)
-                                    }}
-                                >
-                                    {child.text}
-                                </Breadcrumb.Item>
-                        )
-                        : <Breadcrumb.Item
-                            key={e.itemKey}
-                            onClick={() => {
-                                history.replace(basePath + e.itemKey)
-                            }}
-                        >
-                            {e.text}
-                        </Breadcrumb.Item>
+                    <Breadcrumb.Item
+                        key={e.itemKey}
+                        onClick={() => {
+                            if (!e.items) history.replace(basePath + e.itemKey)
+                        }}
+                    >
+                        {e.text}
+                    </Breadcrumb.Item>
                 ))
             }
         </Breadcrumb>
