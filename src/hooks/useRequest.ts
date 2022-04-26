@@ -29,6 +29,7 @@ function useRequest<T, P = undefined>(
     });
     const fetch = useCallback(async (_params?: P) => {
         !loading && setloading(true);
+        // 改4
         const res = await promise({ body: _params || params });
         setloading(false);
         if (res) {

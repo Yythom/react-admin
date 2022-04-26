@@ -5,13 +5,23 @@
 }
 
 * {
-  scrollbar-width: none;
+  // scrollbar-width: none;
   font-family: solana !important;
 
+
+}
+
+.menu {
   &::-webkit-scrollbar {
-    display: none;
+    display: none !important;
+  }
+
+  *::-webkit-scrollbar {
+    display: none !important;
   }
 }
+
+
 
 .semi-card {
   border-radius: 20px;
@@ -29,6 +39,13 @@ body[theme-mode="dark"] {
 
   .header {
     border-bottom: #3d3e3f9b solid 1px !important;
+  }
+}
+
+.semi-button {
+  &:hover {
+    background: none;
+    opacity: .6;
   }
 }
 
@@ -60,9 +77,6 @@ body[theme-mode="dark"] {
       background-color: #F4F6F8;
     }
   }
-
-
-
 }
 
 .card {
@@ -80,7 +94,7 @@ body[theme-mode="dark"] {
     color: var(--text-color);
 
     * {
-      color: #ccc;
+      color: rgb(134, 134, 134);
     }
   }
 }
@@ -103,6 +117,38 @@ body[theme-mode="dark"] {
   }
 }
 
+.semi-page {
+  margin-top: 1rem;
+}
+
+.modal-content {
+  padding-bottom: 2rem;
+}
+
+.semi-modal {
+  width: max-content !important;
+  min-width: 500px;
+}
+
+.search-input-group {
+  .semi-input-wrapper {
+    margin: 1rem;
+
+    &:nth-of-type(1) {
+      margin-left: 0;
+    }
+
+    &:nth-last-of-type(1) {
+      margin-right: 0;
+    }
+  }
+}
+
+.modal-footer {}
+
+.pro_table {
+  margin-top: 1rem;
+}
 
 .btn {
   background-color: #3772ff;
@@ -118,5 +164,15 @@ body[theme-mode="dark"] {
   &:hover {
     color: #fcfcfd !important;
     background: #044eff;
+  }
+}
+
+.app-quit {
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+
+  >span {
+    font-size: 18px;
   }
 }

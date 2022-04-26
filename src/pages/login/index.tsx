@@ -28,7 +28,7 @@ const Login = () => {
                 start_owner: true,
                 initParams: false,
                 callback: (data: any) => {
-                    // history.replace(basePat
+                    history.replace(basePath)
 
                     // Storage.setStorageSync('token', data?.token)
                 }
