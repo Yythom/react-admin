@@ -15,6 +15,7 @@ interface InsetFromInterface {
     fields: (FieldItem)[]
     okText?: ReactNode,
     cencelText?: ReactNode,
+    formItem?: ReactNode,
     children?: ReactNode
     fetch?: (v: any, reset?: boolean) => void | any | Promise<any>
     onChange?: (v: any) => void,

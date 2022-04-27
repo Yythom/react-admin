@@ -1,11 +1,11 @@
 .InsetFrom {
+    width: 100%;
+
     .semi-form-field-label-text {
         margin-bottom: 1rem;
     }
 
-    .semi-input-wrapper {
-        width: 25rem;
-    }
+
 
     .button-group {
 
@@ -17,10 +17,23 @@
             }
         }
     }
+
+    .filds {
+        margin-right: 1rem;
+        display: inline-block;
+
+        .semi-input-wrapper {
+            width: 22rem;
+        }
+    }
 }
 
 .semi-modal-body {
     .button-group {
         margin-bottom: 2rem;
     }
+}
+
+.semi-datepicker {
+    width: max-content !important;
 }
