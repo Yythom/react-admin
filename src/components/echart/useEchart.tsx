@@ -11,61 +11,128 @@ export interface useEchartOption {
 		data: string[] | number[],
 		show?: boolean
 	}
-	y_option: {
-		name?: string,
-		show?: boolean
-	}
-	dataSource: string[] | number[] | undefined
 }
-
-function useEchart(classname: string, option: useEchartOption,) {
+/** 
+ * @param option   
+ * splitLine 隐藏背景的网格线属性
+ */
+export interface sourceItem {
+	name: string,
+	list: number[] | number[][] | string[] | string[][],
+	y_option?: Record<string, any>
+}
+// 获取最大值方法
+function calMax(arr: any) {
+	var max = Math.max.apply(null, arr); // 获取最大值方法
+	var maxint = Math.ceil(max / 5); // 向上以5的倍数取整
+	var maxval = maxint * 5 + 5; // 最终设置的最大值
+	return maxval; // 输出最大值
+}
+// 获取最小值方法
+function calMin(arr: any) {
+	var min = Math.min.apply(null, arr); // 获取最小值方法
+	var minint = Math.floor(min / 1); // 向下以1的倍数取整
+	var minval = minint * 1 - 5; // 最终设置的最小值
+	return minval; // 输出最小值
+}
+function useEchart(classname: string, option: useEchartOption,
+	dataSoure: any
+) {
 	const [chart, setEChart] = useState<echarts.ECharts>();
 
 	useEffect(() => {
 		const dom: HTMLElement | null = document.querySelector('.' + classname)
-		if (dom && option?.dataSource) {
-			let myChart = echarts.init(dom, echart_theme);
-			myChart.setOption({
+		if (dom && dataSoure) {
+			const series = []
+			const yAxis = []
+			const legend: any = []
+			if (Array.isArray(dataSoure[0])) {
+				dataSoure.forEach((e: any, i: number) => {
+					e.forEach((element: any) => {
+						const list = element?.list || []
+						const name = element?.name || ''
+						series.push({
+							// symbol: 'none',
+							showSymbol: false,
+							data: list,
+							name,
+							type: 'line',
+							yAxisIndex: i, // 两边y轴数据显示必须加
+							valueFormatter: function (value: any) {
+								return value + name;
+							},
+							smooth: true,
+							...element?.y_option,
+						})
 
+						yAxis.push({
+							type: 'value',
+							name,
+							splitLine: true,
+							...element?.y_option,
+						})
+						legend.push(name)
+					});
+				})
+			} else {
+				if (dataSoure[0]) {
+					const list = dataSoure[0]?.list || []
+					const name = dataSoure[0]?.name || ''
+					series.push({
+						symbol: 'none',
+						name: name,
+						data: list,
+						type: 'line',
+						smooth: true,
+						...dataSoure[0].y_option,
+					})
+					yAxis.push({
+						type: 'value',
+						name: name,
+						splitLine: true,
+						...dataSoure[0].y_option,
+					})
+					legend.push(name)
+				}
+			}
+			if (!series[0]) return
+			const myChart = echarts.init(dom, echart_theme);
+			const opt = {
 				title: {
 					text: option?.title || ''
 				},
 				xAxis: [
 					{
-						...option.x_option
+						...option.x_option,
+						splitLine: true
 					}
 				],
-				yAxis: [
-					{
-						type: 'value',
-						...option.y_option,
-					}
-				],
-				series: [
-					{
-						symbol: 'none',
-						data: option?.dataSource,
-						type: 'line',
-						smooth: true
-					}
-				],
+				// 提示线条是哪根
+				legend: {
+					data: legend
+				},
+				yAxis,
+				series,
 				tooltip: {
 					trigger: 'axis',
 					//支持字符串模板和回调函数两种形式,模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等
 					// formatter: "{c0}",
-					formatter: (p: any[]) => {
-						const str = p.map(e => {
-							const x = `${option?.x_option?.name || ''}: ${e.axisValue}`;
-							const y = `${option?.y_option?.name || ''}${e.value}`;
-							return `${x}`
-						}).join(' ')
-						return str
-					},
+					// formatter: (p: any[]) => {
+					// 	const str = p.map(e => {
+					// 		const x = `${option?.x_option?.name || ''}: ${e.axisValue}`;
+					// 		const y = `${e.value}`;
+					// 		return `${x}`
+					// 	}).join(' ')
+					// 	return str
+					// },
 				},
-			});
+			}
+			console.log(opt);
+
+			myChart.setOption(opt);
 			setEChart(myChart);
 		}
-	}, [option?.dataSource])
+	}, [dataSoure])
 
 	return [
 		chart,
