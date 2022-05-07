@@ -34,11 +34,15 @@ const DemoComponent = memo(() => {
                         name: 'X',
                         data: [1, 2, 3, 4, 5, 6, 7],
                     },
-                    y_option: {
-                        name: 'Y'
-                    },
-                    dataSource: [140, 232, 101, 264, 90, 340, 250],
                 }}
+                dataSource={[
+                    [
+                        {
+                            name: '123',
+                            list: [133, 334, 555, 766, 1233]
+                        }
+                    ]
+                ]}
             />
         </div>
     </div>

@@ -1,4 +1,3 @@
-import CacheRoute from "react-router-cache-route";
 import {
     Route,
 } from "react-router-dom";
@@ -60,9 +59,9 @@ const RouteComponentsMap: {
     },
     'system/demo': {
         text: 'demo测试',
-        component: <CacheRoute exact path={setPagePath('system/demo')} >
+        component: <Route exact path={setPagePath('system/demo')} >
             <DemoComponent />
-        </CacheRoute >
+        </Route >
     }
 }
 
