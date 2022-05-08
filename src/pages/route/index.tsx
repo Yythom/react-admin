@@ -42,7 +42,7 @@ const get_menu_route: () => Promise<RouteItemInterface[]> = async () => {
     return new Promise<RouteItemInterface[]>((resolve, reject) => {
         setTimeout(() => {
             resolve(menu_route);
-        }, 1000);
+        }, 200);
     })
 }
 

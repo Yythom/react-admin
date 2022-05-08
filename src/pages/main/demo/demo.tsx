@@ -2,6 +2,7 @@
 import ProEchart from "@/components/echart/pro_echart";
 import { memo, useEffect, useState } from "react";
 import './index.scss'
+import { MoveBox, MoveSquare, MoveTigger } from "./movepophover";
 import OssUpload from "./oss/oss_upload";
 
 const arr = [1, 2, 3, 4]
@@ -45,6 +46,12 @@ const DemoComponent = memo(() => {
                 ]}
             />
         </div>
+        <MoveBox>
+            <MoveTigger>
+                移入到此处
+            </MoveTigger>
+            <MoveSquare>1923890</MoveSquare>
+        </MoveBox>
     </div>
 });
 
