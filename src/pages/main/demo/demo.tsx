@@ -28,6 +28,12 @@ const DemoComponent = memo(() => {
                     )
                 }
             </div>
+            <MoveBox>
+                <MoveTigger>
+                    移入到此处
+                </MoveTigger>
+                <MoveSquare>1923890</MoveSquare>
+            </MoveBox>
             <ProEchart
                 classname='test'
                 option={{
@@ -46,12 +52,7 @@ const DemoComponent = memo(() => {
                 ]}
             />
         </div>
-        <MoveBox>
-            <MoveTigger>
-                移入到此处
-            </MoveTigger>
-            <MoveSquare>1923890</MoveSquare>
-        </MoveBox>
+
     </div>
 });
 

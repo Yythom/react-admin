@@ -1,4 +1,4 @@
-import { createContext, memo, useContext, useState } from "react"
+import { createContext, memo, useContext, useRef, useState } from "react"
 
 const MoveContext = createContext<{ xy: [number, number], show: boolean }>({ xy: [0, 0], show: false })
 
@@ -9,7 +9,7 @@ const MoveBox = memo((props) => {
     return (
         <div
             onMouseEnter={() => setShow(true)}
-            onMouseMove={e => setXy([e.clientX - 12, e.clientY + 20])}
+            onMouseMove={e => setXy([e.clientX, e.clientY + 20])}
             onMouseLeave={() => setShow(false)}
             style={{
                 width: 'max-content',
@@ -27,21 +27,38 @@ const MoveBox = memo((props) => {
 
 const MoveSquare = memo(({ children }) => {
     const ctx = useContext(MoveContext);
+    const ref = useRef<any>()
+
     return (
         <>
             {
                 ctx.show && <div
+                    ref={ref}
                     style={{
-                        left: ctx.xy[0] + 'px',
+                        left: ctx.xy[0] - ref.current?.clientWidth / 2 + 'px',
                         top: ctx.xy[1] + 'px',
                         position: 'fixed',
                         width: 'max-content',
                         height: 'max-content',
                         background: '#FFF',
                         padding: '10px',
+                        boxShadow: "0 2px 5px 0 rgb(135 152 164 / 50%)",
                         borderRadius: '10px',
+                        zIndex: 99
                     }}
                 >
+                    <div
+                        style={{
+                            border: "10px solid",
+                            borderColor: "transparent transparent #fff transparent",
+                            position: "absolute",
+                            top: "-18px",
+                            left: "50%",
+                            borderRadius: "2px",
+                            transform: "translateX(-50%)",
+                        }}
+
+                    />
                     {children}
                 </div>
             }
