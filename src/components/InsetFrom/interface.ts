@@ -1,5 +1,5 @@
 import { CSSProperties, ReactNode } from "react";
-import { CommonFieldProps } from '@douyinfe/semi-ui/lib/es/form';
+import { BaseFormProps, CommonFieldProps } from '@douyinfe/semi-ui/lib/es/form';
 
 interface FieldItem extends CommonFieldProps {
     type?: string, // node 类型 'Input'
@@ -16,7 +16,7 @@ interface InsetFromInterface {
     okText?: ReactNode,
     cencelText?: ReactNode,
     formItem?: ReactNode,
-    children?: ReactNode
+    children?: ReactNode | BaseFormProps['getFormApi']
     fetch?: (v: any, reset?: boolean) => void | any | Promise<any>
     onChange?: (v: any) => void,
     onCencel?: () => void,
