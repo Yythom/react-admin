@@ -16,7 +16,7 @@ class MyWrapper extends React.Component {
             // <ResponsiveMasonry
             //     columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
             // >
-            <Masonry>
+            <Masonry columnsCount={2} >
                 <div style={{ height: '100px', background: 'pink', margin: '10px' }}>1</div>
                 <div style={{ height: '120px', background: 'pink', margin: '10px' }}>2</div>
                 <div style={{ height: '140px', background: 'pink', margin: '10px' }}>3</div>
