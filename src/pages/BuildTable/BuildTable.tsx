@@ -1,7 +1,7 @@
 import LangComponent from '@/lang/local';
 import { Pagination, Table } from '@douyinfe/semi-ui';
 import { ColumnProps } from '@douyinfe/semi-ui/lib/es/table';
-import { memo, useContext } from 'react';
+import { memo } from 'react';
 import useTable from '../../hooks/useTable';
 
 const BuildTable = memo((
@@ -13,7 +13,6 @@ const BuildTable = memo((
         ret: any // 原始数据
         onChange?: any
         hidePage?: boolean
-        pageSize?: number
     }) => {
     return (
         <div className="pro_table card">

@@ -5,6 +5,8 @@ import './index.scss'
 import { MoveBox, MoveSquare, MoveTigger } from "./movepophover";
 import OssUpload from "./oss/oss_upload";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
+import JoditEditor from "jodit-react";
+import Editor from "./editor";
 const images = [
     "https://picsum.photos/200/300?image=1050",
     //...
@@ -37,6 +39,7 @@ const DemoComponent = memo(() => {
 
     return <div>
         {/* <MyWrapper /> */}
+        <Editor placeholder="dadwalkdnlk" />
 
         <div style={{ width: '100px' }}>
             <OssUpload />
@@ -58,7 +61,6 @@ const DemoComponent = memo(() => {
                 </MoveTigger>
                 <MoveSquare>1923890</MoveSquare>
             </MoveBox>
-
 
 
             {/* <ProEchart

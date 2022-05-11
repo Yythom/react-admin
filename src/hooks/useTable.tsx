@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ChangeInfo, ColumnProps } from "@douyinfe/semi-ui/lib/es/table";
-import { createContext, memo, MemoExoticComponent, useLayoutEffect } from "react";
+import { memo, MemoExoticComponent, useLayoutEffect } from "react";
 import BuildTable from "@/pages/BuildTable/BuildTable";
 import useRequest from "./useRequest";
 useTable.initPage = { // 改1
@@ -94,7 +94,12 @@ function useTable<T, P = undefined>(
          */
         BuildTable:
 
-            memo((props: { columns: ColumnProps<any>[], onChange?: any, hidePage?: boolean }) =>
+            memo((props:
+                {
+                    columns: ColumnProps<any>[],
+                    onChange?: any,
+                    hidePage?: boolean
+                }) =>
                 <BuildTable
                     // 改5
                     buildDataSource={(ret as any)?.list || []}
@@ -105,10 +110,6 @@ function useTable<T, P = undefined>(
                     {...props}
                 />
             )
-
-
-
-
         ,
         handle: {
             setSearch, //// table 自定义search
