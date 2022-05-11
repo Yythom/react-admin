@@ -2,9 +2,9 @@ import JoditEditor from 'jodit-react';
 import { createContext, memo, ReactNode, useMemo, useRef, useState } from 'react';
 const EditorContext = createContext<{ editorApi: React.MutableRefObject<null> } | undefined>(undefined)
 
-const Editor = memo(({ placeholder, children }: { placeholder: string, children?: ReactNode }) => {
+const Editor = memo(({ placeholder, children, initContent }: { placeholder: string, children?: ReactNode, initContent?: string }) => {
     const editor = useRef<any>(null)
-    const [content, setContent] = useState('')
+    const [content, setContent] = useState(initContent || '')
 
     const config = useMemo(() => {
         return {
