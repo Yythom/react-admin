@@ -10,7 +10,7 @@ import { actions, GlobalStateInterface } from "../../store/global_slice";
 import useRequest from "../../hooks/useRequest";
 import { Button, Input } from "@douyinfe/semi-ui";
 import { basePath } from "../route";
-import Logo from "../../global-component/logo";
+import Logo from "../../features/logo";
 import { useEffect } from "react";
 import sha1 from 'sha1';
 import { postApiV1AdminProfileLogin, PostApiV1AdminProfileLoginOption, PostApiV1AdminProfileLoginResponseSuccess, ProfileLoginRequest, ProfileLoginResponse } from "@/service/demo";

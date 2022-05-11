@@ -9,7 +9,7 @@ import Storage from "../../utils/js_utils/storage";
 import { actions, GlobalStateInterface } from "../../store/global_slice";
 import './index.scss'
 import { basePath, } from "../route";
-import Icon from "../../global-component/icon";
+import Icon from "../../components/icon";
 
 const Menu = () => {
     const history = useHistory()

@@ -1,34 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import ProEchart from "@/components/echart/pro_echart";
+import ProEchart from "@/features/echart/pro_echart";
 import React, { memo, useEffect, useState } from "react";
 import './index.scss'
-import { MoveBox, MoveSquare, MoveTigger } from "./movepophover";
-import OssUpload from "./oss/oss_upload";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
+import { MoveBox, MoveSquare, MoveTigger } from "../../../features/movepophover";
+import OssUpload from "../../../features/oss/oss_upload";
+import Masonry from "react-responsive-masonry"
 import JoditEditor from "jodit-react";
-import Editor from "./editor";
+import Editor from "../../../features/editor";
+import handleViewport from "react-in-viewport";
+import ViewPort from "@/components/view_port";
 const images = [
     "https://picsum.photos/200/300?image=1050",
     //...
     "https://picsum.photos/300/300?image=206",
 ]
-class MyWrapper extends React.Component {
-    render() {
-        return (
-            // <ResponsiveMasonry
-            //     columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
-            // >
-            <Masonry columnsCount={2} >
-                <div style={{ height: '100px', background: 'pink', margin: '10px' }}>1</div>
-                <div style={{ height: '120px', background: 'pink', margin: '10px' }}>2</div>
-                <div style={{ height: '140px', background: 'pink', margin: '10px' }}>3</div>
-                <div style={{ height: '90px', background: 'pink', margin: '10px' }}>4</div>
-                <div style={{ height: '160px', background: 'pink', margin: '10px' }}>4</div>
-            </Masonry>
-            // </ResponsiveMasonry>
-        )
-    }
-}
+
 const arr = [1, 2, 3, 4]
 const DemoComponent = memo(() => {
     const [index, setIndex] = useState(0);
@@ -39,13 +25,23 @@ const DemoComponent = memo(() => {
 
     return <div>
         {/* <MyWrapper /> */}
-        <Editor placeholder="dadwalkdnlk" />
+        <Editor placeholder="dadwalkdnlk" option={{ minHeight: 1000 }} />
+        {
+            <Masonry columnsCount={3} >
+                {
+                    Array.from(new Array(1000).keys()).map(e => {
+                        return <ViewPort key={e} height='200px' >
+                            <div style={{ background: 'pink', width: '200px', height: '200px', marginBottom: '30px' }}></div>
+                        </ViewPort>
+                    })
+                }
+            </Masonry>
+        }
 
         <div style={{ width: '100px' }}>
-            <OssUpload />
+            {/* <OssUpload /> */}
             {/* 层叠布局 */}
             {/* <ImagesComponent imgList={Array.from(Array(20))} /> */}
-
             <div className="swiper">
                 <span onClick={() => move(index - 1)}>{'<'}</span>
                 <span onClick={() => move(index + 1)}>{'>'}</span>
@@ -55,12 +51,12 @@ const DemoComponent = memo(() => {
                     )
                 }
             </div>
-            <MoveBox>
+            {/* <MoveBox>
                 <MoveTigger>
                     移入到此处
                 </MoveTigger>
                 <MoveSquare>1923890</MoveSquare>
-            </MoveBox>
+            </MoveBox> */}
 
 
             {/* <ProEchart

@@ -1,4 +1,4 @@
-import { ossURL, setOssFilepath } from "../../../../service/config/config";
+import { ossURL, setOssFilepath } from "../../service/config/config";
 import Axios from 'axios'
 
 export interface OSSParams {

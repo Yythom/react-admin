@@ -1,8 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import JoditEditor from 'jodit-react';
 import { createContext, memo, ReactNode, useMemo, useRef, useState } from 'react';
 const EditorContext = createContext<{ editorApi: React.MutableRefObject<null> } | undefined>(undefined)
 
-const Editor = memo(({ placeholder, children, initContent }: { placeholder: string, children?: ReactNode, initContent?: string }) => {
+const Editor = memo(({ placeholder, children, initContent, option }:
+    { placeholder: string, children?: ReactNode, initContent?: string, option?: any }) => {
+
     const editor = useRef<any>(null)
     const [content, setContent] = useState(initContent || '')
 
@@ -15,7 +18,7 @@ const Editor = memo(({ placeholder, children, initContent }: { placeholder: stri
             style: {
                 // font: '99px Arial',
             },
-            "minHeight": 400,
+            "minHeight": option?.minHeight || 400,
             disablePlugins: ['table'],
             events: {
                 getIcon: (name: any, control: any, clearName: any) => {

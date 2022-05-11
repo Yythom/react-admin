@@ -1,4 +1,4 @@
-import Portals from "@/global-component/portals"
+import Portals from "@/components/portals"
 import { createContext, memo, useContext, useRef, useState } from "react"
 
 const MoveContext = createContext<{ xy: [number, number], show: boolean }>({ xy: [0, 0], show: false })

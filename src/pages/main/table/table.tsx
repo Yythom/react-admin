@@ -2,7 +2,7 @@
 import { memo, useMemo } from "react";
 import useTable from "../../../hooks/useTable";
 import './style.scss'
-import InsetFrom from "@/components/InsetFrom/Form";
+import InsetFrom from "@/features/InsetFrom/Form";
 
 const ProTable = memo(() => {
     const {

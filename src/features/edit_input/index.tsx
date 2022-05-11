@@ -1,4 +1,4 @@
-import Icon from '@/global-component/icon';
+import Icon from '@/components/icon';
 import { Input } from '@douyinfe/semi-ui';
 import { CSSProperties, Fragment, memo, ReactNode, useState } from 'react';
 const EditInput = memo(({ defaultValue, children, style, onOK, permission_id }: {
