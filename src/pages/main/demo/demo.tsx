@@ -61,7 +61,7 @@ const DemoComponent = memo(() => {
 
 
 
-            <ProEchart
+            {/* <ProEchart
                 classname='test'
                 option={{
                     x_option: {
@@ -77,7 +77,7 @@ const DemoComponent = memo(() => {
                         }
                     ]
                 ]}
-            />
+            /> */}
         </div>
 
     </div>

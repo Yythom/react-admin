@@ -40,7 +40,7 @@ function request<T>(url: string, config: AxiosRequestConfig): Promise<T | undefi
                     duration: 2,
                 };
                 if (res?.code === 0) {
-                    resolve(res.data)
+                    return resolve(res.data)
 
                 } else if (res?.code === 'B_0000005') {
                     // Toast.warning(opts);
@@ -55,6 +55,7 @@ function request<T>(url: string, config: AxiosRequestConfig): Promise<T | undefi
                 } else {
                     Toast.warning(opts);
                 }
+                resolve(undefined)
             }
         }).catch(err => {
             if (err.response) {

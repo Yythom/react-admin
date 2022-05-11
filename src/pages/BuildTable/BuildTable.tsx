@@ -1,11 +1,11 @@
 import LangComponent from '@/lang/local';
 import { Pagination, Table } from '@douyinfe/semi-ui';
 import { ColumnProps } from '@douyinfe/semi-ui/lib/es/table';
-import { memo } from 'react';
+import { memo, useContext } from 'react';
 import useTable from '../../hooks/useTable';
 
 const BuildTable = memo((
-    { buildDataSource, columns, loading, setParams, ret, onChange, hidePage, pageSize }: {
+    { buildDataSource, columns, loading, setParams, ret, onChange, hidePage }: {
         buildDataSource: any[],
         columns: ColumnProps<any>[],
         loading: boolean,
@@ -29,7 +29,9 @@ const BuildTable = memo((
             {!hidePage && <div className="flex-end">
                 <LangComponent>
                     <Pagination
-                        pageSize={pageSize}
+                        // page_size
+                        pageSize={(ret as any)?.page.page_size}
+                        // total
                         total={(ret as any)?.total}
                         onChange={(currentPage, page_size) => {
                             console.log(page_size);

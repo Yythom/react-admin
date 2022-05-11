@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ChangeInfo, ColumnProps } from "@douyinfe/semi-ui/lib/es/table";
-import { memo, MemoExoticComponent, useLayoutEffect } from "react";
+import { createContext, memo, MemoExoticComponent, useLayoutEffect } from "react";
 import BuildTable from "@/pages/BuildTable/BuildTable";
 import useRequest from "./useRequest";
 useTable.initPage = { // 改1
@@ -43,6 +43,7 @@ function useTable<T, P = undefined>(
         initParams: { page: useTable.initPage, ...option?.initParams },
         start_owner: option?.start_owner,
     })
+
 
     useLayoutEffect(() => {
         option?.start_owner && fetch();
@@ -91,18 +92,24 @@ function useTable<T, P = undefined>(
         /**
          * 业务逻辑
          */
-        BuildTable: memo(({ columns, onChange, hidePage }: { columns: ColumnProps<any>[], onChange?: any, hidePage?: boolean }) =>
-            <BuildTable
-                // 改5
-                buildDataSource={(ret as any)?.list || []}
-                loading={loading}
-                columns={columns}
-                setParams={setParams}
-                ret={ret}
-                onChange={(e: ChangeInfo<any>) => { onTableChange(e) }}
-                pageSize={(params as any)?.page.page_size}
-                hidePage={hidePage}
-            />),
+        BuildTable:
+
+            memo((props: { columns: ColumnProps<any>[], onChange?: any, hidePage?: boolean }) =>
+                <BuildTable
+                    // 改5
+                    buildDataSource={(ret as any)?.list || []}
+                    loading={loading}
+                    setParams={setParams}
+                    ret={ret}
+                    onChange={(e: ChangeInfo<any>) => { onTableChange(e) }}
+                    {...props}
+                />
+            )
+
+
+
+
+        ,
         handle: {
             setSearch, //// table 自定义search
             onTableChange,
