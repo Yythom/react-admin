@@ -1,3 +1,4 @@
+import Portals from "@/global-component/portals"
 import { createContext, memo, useContext, useRef, useState } from "react"
 
 const MoveContext = createContext<{ xy: [number, number], show: boolean }>({ xy: [0, 0], show: false })
@@ -32,35 +33,39 @@ const MoveSquare = memo(({ children }) => {
     return (
         <>
             {
-                ctx.show && <div
-                    ref={ref}
-                    style={{
-                        left: ctx.xy[0] - ref.current?.clientWidth / 2 + 'px',
-                        top: ctx.xy[1] + 'px',
-                        position: 'fixed',
-                        width: 'max-content',
-                        height: 'max-content',
-                        background: '#FFF',
-                        padding: '10px',
-                        boxShadow: "0 2px 5px 0 rgb(135 152 164 / 50%)",
-                        borderRadius: '10px',
-                        zIndex: 99
-                    }}
-                >
+                ctx.show &&
+                <Portals >
                     <div
+                        ref={ref}
                         style={{
-                            border: "10px solid",
-                            borderColor: "transparent transparent #fff transparent",
-                            position: "absolute",
-                            top: "-18px",
-                            left: "50%",
-                            borderRadius: "2px",
-                            transform: "translateX(-50%)",
+                            left: ctx.xy[0] - ref.current?.clientWidth / 2 + 'px',
+                            top: ctx.xy[1] + 'px',
+                            position: 'fixed',
+                            width: 'max-content',
+                            height: 'max-content',
+                            background: '#FFF',
+                            padding: '10px',
+                            boxShadow: "0 2px 5px 0 rgb(135 152 164 / 50%)",
+                            borderRadius: '10px',
+                            zIndex: 99
                         }}
+                    >
+                        <div
+                            style={{
+                                border: "10px solid",
+                                borderColor: "transparent transparent #fff transparent",
+                                position: "absolute",
+                                top: "-18px",
+                                left: "50%",
+                                borderRadius: "2px",
+                                transform: "translateX(-50%)",
+                            }}
 
-                    />
-                    {children}
-                </div>
+                        />
+                        {children}
+                    </div>
+                </Portals>
+
             }
         </>
 

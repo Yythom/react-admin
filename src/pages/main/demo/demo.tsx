@@ -36,7 +36,7 @@ const DemoComponent = memo(() => {
     }
 
     return <div>
-        <MyWrapper />
+        {/* <MyWrapper /> */}
 
         <div style={{ width: '100px' }}>
             <OssUpload />
