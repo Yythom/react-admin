@@ -9,6 +9,7 @@ import JoditEditor from "jodit-react";
 import Editor from "../../../features/editor";
 import handleViewport from "react-in-viewport";
 import ViewPort from "@/components/view_port";
+import ErrorBoundary from "@/components/ErrorBoundary";
 const images = [
     "https://picsum.photos/200/300?image=1050",
     //...
@@ -16,6 +17,9 @@ const images = [
 ]
 
 const arr = [1, 2, 3, 4]
+const Err = () => {
+    return <div>{(arr[0] as any).a.b}</div>
+}
 const DemoComponent = memo(() => {
     const [index, setIndex] = useState(0);
 
@@ -24,9 +28,12 @@ const DemoComponent = memo(() => {
     }
 
     return <div>
+        {/* <ErrorBoundary>
+            <Err />
+        </ErrorBoundary> */}
         {/* <MyWrapper /> */}
         <Editor placeholder="dadwalkdnlk" option={{ minHeight: 1000 }} />
-        {
+        {/* {
             <Masonry columnsCount={3} >
                 {
                     Array.from(new Array(1000).keys()).map(e => {
@@ -36,7 +43,7 @@ const DemoComponent = memo(() => {
                     })
                 }
             </Masonry>
-        }
+        } */}
 
         <div style={{ width: '100px' }}>
             {/* <OssUpload /> */}
@@ -51,6 +58,7 @@ const DemoComponent = memo(() => {
                     )
                 }
             </div>
+
             {/* <MoveBox>
                 <MoveTigger>
                     移入到此处
