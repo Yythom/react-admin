@@ -53,6 +53,7 @@ const DemoComponent = memo(() => {
                 width: '80rem',
                 height: '30rem'
             }}>
+                {/* https://github.com/zhihu/griffith/blob/master/packages/griffith/README-zh-Hans.md */}
                 <Player sources={sources} id={""} />
             </div>
         </div>
