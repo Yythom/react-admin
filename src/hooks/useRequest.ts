@@ -22,15 +22,17 @@ function useRequest<T, P = undefined>(
     const [loading, setloading] = useState<boolean>(false);
     const [params, setParams] = useSearch<P>(option.initParams, {
         callback: (k, v) => {
-            if (k === 'page' || k === 'pageSize') {
-                fetch({ ...params, [k]: v })
+            if (k === 'page' || k === 'pageSize' || k === 'page_Size') {
+                option.start_owner && fetch({ ...params, [k]: v })
             }
         }
     });
-    const fetch = useCallback(async (_params?: P) => {
+    const fetch = useCallback(async (_params?: P, noSetParams?: boolean) => {
         !loading && setloading(true);
-        // 改4
-        const res = await promise({ body: _params || params });
+        if (_params && !noSetParams) {
+            setParams({ ..._params });
+        }
+        const res = await promise(_params || params);
         setloading(false);
         if (res) {
             setRet(res);
@@ -46,8 +48,8 @@ function useRequest<T, P = undefined>(
 
     useEffect(() => {
         // 监听模式需要控制变量useMemo
-        if (option?.listen_params) fetch(option?.listen_params)
-    }, [option?.listen_params])
+        if (option?.listen_params && !option.start_owner) fetch({ ...params, ...option?.listen_params }, true)
+    }, [option?.listen_params, params])
 
     return [
         ret,
