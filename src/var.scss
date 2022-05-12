@@ -24,3 +24,8 @@ html {
 img {
     border-radius: 8px;
 }
+
+iframe {
+    z-index: -99999 !important;
+    left: -999999px !important;
+}

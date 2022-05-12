@@ -9,7 +9,7 @@ import JoditEditor from "jodit-react";
 import Editor from "../../../features/editor";
 import handleViewport from "react-in-viewport";
 import ViewPort from "@/components/view_port";
-import ErrorBoundary from "@/components/ErrorBoundary";
+import ErrorBoundary from "@/components/Boundary";
 const images = [
     "https://picsum.photos/200/300?image=1050",
     //...
@@ -28,9 +28,9 @@ const DemoComponent = memo(() => {
     }
 
     return <div>
-        {/* <ErrorBoundary>
+        <ErrorBoundary>
             <Err />
-        </ErrorBoundary> */}
+        </ErrorBoundary>
         {/* <MyWrapper /> */}
         <Editor placeholder="dadwalkdnlk" option={{ minHeight: 1000 }} />
         {/* {
