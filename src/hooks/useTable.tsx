@@ -12,7 +12,8 @@ function useTable<T, P = undefined>(
     promise: (data: any) => Promise<any>,
     option: {
         start_owner?: boolean,
-        initParams: {},
+        initParams?: {},
+        listen_params?: {}
         // callback?:()
     },
 ): {
@@ -42,6 +43,7 @@ function useTable<T, P = undefined>(
         // 改2
         initParams: { page: useTable.initPage, ...option?.initParams },
         start_owner: option?.start_owner,
+        listen_params: option?.listen_params
     })
 
 
