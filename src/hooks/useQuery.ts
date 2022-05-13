@@ -60,7 +60,8 @@ const useQuery = <T, P>(
         const req = { ...(_params || params), page: page || (params as any)?.page + 1 }
         if (options?.onwerRun) {
             refetch({ queryKey: [queryKey, req] })
-        } else setParams(req)
+        }
+        setParams(req)
     }
 
     return [
