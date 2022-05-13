@@ -12,6 +12,7 @@ const useQuery = <T, P>(
         onwerRun?: boolean,
         onSuccess?: (data: T) => void,
         onError?: () => void,
+        cacheTime?: number // mm
     }
 ) => {
     const [params, setParams] = useSearch<P>(initParams)
@@ -47,7 +48,8 @@ const useQuery = <T, P>(
             },
             onSuccess: (result) => {
                 options?.onSuccess?.(result)
-            }
+            },
+            cacheTime: options?.cacheTime || 2 * 60 * 1000
         })
 
     // console.log(status, 'status');
