@@ -1,16 +1,17 @@
 import { Toast } from '@douyinfe/semi-ui'
-import axios, { AxiosRequestConfig } from 'axios'
-import Storage from '../../utils/js_utils/storage'
+import axios from 'axios'
+import Storage from '@/utils/js_utils/storage'
 import { baseURL, timeout } from './config'
 
-function request<T>(url: string, config: AxiosRequestConfig): Promise<T | undefined> {
+function request<T>(url: string, config: any): Promise<T | undefined> {
     const instance = axios.create({
-        baseURL,
-        timeout,
+        baseURL: baseURL,
+        timeout: timeout,
         method: config?.method || 'POST',
+        // data: config.body || {},
         headers: {
             'Content-Type': 'application/json',
-            'authorization': 'Bearer ' + Storage.getStorageSync('token')
+            'Authorization': 'Bearer ' + Storage.getStorageSync('token')
         }
     })
 
@@ -33,29 +34,29 @@ function request<T>(url: string, config: AxiosRequestConfig): Promise<T | undefi
 
     // 此处封装一层捕捉错误
     return new Promise((resolve, reject) => {
-        instance({ url, ...config }).then((res: any) => {
+        const conf = { url, ...config, data: config.body }
+        delete conf.body;
+        instance(conf).then((res: any) => {
             if (res) {
                 let opts = {
                     content: res?.msg,
                     duration: 2,
                 };
                 if (res?.code === 0) {
-                    return resolve(res.data)
+                    resolve(res.data)
 
-                } else if (res?.code === 'B_0000005') {
-                    // Toast.warning(opts);
-                    // const domain = Storage.getStorageSync('domain')
-                    // setTimeout(() => {
-                    //     Storage.clear();
-                    //     Storage.setStorageSync('domain', domain);
-                    // }, 1000);
-                    // setTimeout(() => {
-                    //     window.location.href = window.location.origin;
-                    // }, 2000);
+                } else if (res?.code === 'B_0000002') {
+                    Toast.warning(opts);
+                }
+                else if (res?.code === 'B_0000005') {
+                    Toast.warning(opts);
+                    localStorage.removeItem('token')
+                    setTimeout(() => {
+                        window.location.href = window.location.origin;
+                    }, 1000);
                 } else {
                     Toast.warning(opts);
                 }
-                resolve(undefined)
             }
         }).catch(err => {
             if (err.response) {

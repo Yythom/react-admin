@@ -7,12 +7,19 @@ import 'dayjs/locale/zh-cn';
 import './App.scss'
 import './var.scss'
 import './font/iconfont.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import ErrorBoundary from './components/Boundary';
 dayjs.locale('zh-cn');
 
 if (process?.env?.NODE_ENV !== "development") window.console.log = () => { }
+const queryClient = new QueryClient()
 ReactDOM.render(
     <Provider store={store}>
-        < App />
+        <QueryClientProvider client={queryClient}>
+            <ErrorBoundary>
+                < App />
+            </ErrorBoundary>
+        </QueryClientProvider>
     </Provider>,
     document.getElementById('root')
 );

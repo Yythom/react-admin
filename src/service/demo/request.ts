@@ -5301,6 +5301,7 @@ export const postApiV1AdminProfileLogin = /* #__PURE__ */ (() => {
   function request(
     option: PostApiV1AdminProfileLoginOption
   ): Promise<PostApiV1AdminProfileLoginResponseSuccess> {
+
     return requester(url, {
       method,
       ...option,
