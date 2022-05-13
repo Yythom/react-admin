@@ -15,6 +15,7 @@ import useSlice from "@/hooks/useSlice";
 import ThemeMode from "@/components/theme_mode";
 import RouteComponentsMap, { basePath } from "@/pages/route";
 import ProBreadcrumb from "@/features/pro_breadcrumb";
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 const header = memo(() =>
   <div className="header fb">
@@ -68,6 +69,10 @@ const App = () => {
           </div>
         </div>
       </Router >
+      {
+        process?.env?.NODE_ENV === "development" && <ReactQueryDevtools />
+      }
+
     </div >
   );
 }
