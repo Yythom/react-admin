@@ -63,7 +63,10 @@ function useTable<T, P = undefined>(
             ...params,
             page: useTable.initPage,
             search: {
-                ...origin?.search,
+                search: {
+                    ...(params as any)?.search,
+                    ...(option?.listen_params as any)?.search
+                }
             }
         }
         if (typeof key === 'object') {
