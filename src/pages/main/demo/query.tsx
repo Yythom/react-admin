@@ -6,13 +6,14 @@ import { Button } from '@douyinfe/semi-ui';
 import { memo, } from 'react';
 const SendQuery = memo(() => {
     const [data, params, setParams, { fetch, fetchPage }] = useQuery<any, ProfileLoginRequest>(
-        'login',
         postApiV1AdminProfileLogin,
         {
-            "password": "7c222fb2927d828af22f592134e8932480637c0d",
-            "account": "superadmin",
-            page: 1
-        } as any
+            initParams: {
+                "password": "7c222fb2927d828af22f592134e8932480637c0d",
+                "account": "superadmin",
+                page: 1
+            } as any,
+        }
     )
     // const mutation = useMutation(postTodo, {
     //     onSuccess: () => {

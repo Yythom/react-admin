@@ -6,10 +6,10 @@ import useSearch from "./useSearch";
 
 
 const useQuery = <T, P>(
-    queryKey = '',
     http: (data: any) => Promise<any>,
-    initParams: P,
     options?: {
+        initParams?: P,
+        queryKey?: string,
         onwerRun?: boolean,
         onSuccess?: (data: T) => void,
         onError?: () => void,
@@ -26,7 +26,8 @@ const useQuery = <T, P>(
             loading: boolean
         },
     ] => {
-    const [params, setParams] = useSearch<P>(initParams)
+    const queryKey = useMemo(() => (http as any)?.url, [options?.queryKey])
+    const [params, setParams] = useSearch<P>(options?.initParams)
 
     const {
         data,
