@@ -5,7 +5,7 @@ import { postApiV1AdminProfileLogin, ProfileLoginRequest } from '@/service/demo'
 import { Button } from '@douyinfe/semi-ui';
 import { memo, } from 'react';
 const SendQuery = memo(() => {
-    const [data, params, setParams, { refetch, fetchPage }] = useQuery<any, ProfileLoginRequest>(
+    const [data, params, setParams, { fetch, fetchPage }] = useQuery<any, ProfileLoginRequest>(
         'login',
         postApiV1AdminProfileLogin,
         {

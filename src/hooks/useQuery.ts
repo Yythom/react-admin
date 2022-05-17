@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { QueryFunctionContext, QueryKey, useInfiniteQuery, useQuery as originQuery } from "react-query"
 import useSearch from "./useSearch";
 
+
 const useQuery = <T, P>(
     queryKey = '',
     http: (data: any) => Promise<any>,
@@ -14,7 +15,17 @@ const useQuery = <T, P>(
         onError?: () => void,
         cacheTime?: number // mm
     }
-) => {
+): [
+        data: T | undefined,
+        params: P,
+        setParams: (key: any, v?: any) => void,
+        effect: {
+            fetch: (_params?: any) => void
+            fetchPage: (page?: number | undefined, _params?: P | undefined) => void
+            isFetching: boolean
+            loading: boolean
+        },
+    ] => {
     const [params, setParams] = useSearch<P>(initParams)
 
     const {
@@ -64,18 +75,21 @@ const useQuery = <T, P>(
         setParams(req)
     }
 
+    const fetch = (_params?: P) => {
+        refetch({ queryKey: [queryKey, _params] })
+    }
+
     return [
         data,
         params,
         setParams,
         /** effect */
         {
-            refetch,
+            fetch,
             fetchPage,
             isFetching,
             loading,
         }, // status
-
         /** paging */
     ]
 }
