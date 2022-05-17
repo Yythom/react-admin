@@ -79,7 +79,6 @@ const useQuery = <T, P>(
         /** paging */
     ]
 }
-
 export {
     useQuery
 }

@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import { memo } from 'react'
 import { ErrorBoundary as Origin } from 'react-error-boundary'
+import { QueryErrorResetBoundary } from 'react-query';
 
 function ErrorFallback({ error, resetErrorBoundary }) {
     return (
@@ -20,9 +22,38 @@ const myErrorHandler = (error, info) => {
 }
 
 const ErrorBoundary = memo((props) => (
-    <Origin FallbackComponent={ErrorFallback} onError={myErrorHandler}>
-        {props.children}
-    </Origin>
+    <QueryErrorResetBoundary>
+        {/* <Origin FallbackComponent={ErrorFallback} onError={myErrorHandler}>
+            {props.children}
+        </Origin> */}
+        {({ reset }) => (
+            <Origin
+                fallbackRender={({ error, resetErrorBoundary }) => (
+                    <div>
+                        There was an error!{" "}
+                        <button onClick={() => resetErrorBoundary()}>Try again</button>
+                        <pre style={{ whiteSpace: "normal" }}>{error.message}</pre>
+                    </div>
+                )}
+                onReset={reset}
+            >
+                {props.children}
+                {/* <React.Suspense fallback={<h1>Loading projects...</h1>}>
+                    {showProjects ? (
+                        activeProject ? (
+                            <Project
+                                activeProject={activeProject}
+                                setActiveProject={setActiveProject}
+                            />
+                        ) : (
+                            <Projects setActiveProject={setActiveProject} />
+                        )
+                    ) : null}
+                </React.Suspense> */}
+            </Origin>
+        )}
+
+    </QueryErrorResetBoundary>
 ))
 
 export default ErrorBoundary

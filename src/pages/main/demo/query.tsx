@@ -14,8 +14,6 @@ const SendQuery = memo(() => {
             page: 1
         } as any
     )
-
-
     // const mutation = useMutation(postTodo, {
     //     onSuccess: () => {
     //       // Invalidate and refetch
@@ -32,6 +30,7 @@ const SendQuery = memo(() => {
         123123
 
         <Button onClick={() => fetchPage()}>分页</Button>
+        <Button onClick={() => fetchPage(10)}>第10</Button>
     </div>
 })
 export default SendQuery;
