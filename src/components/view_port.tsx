@@ -32,7 +32,7 @@ const ViewPort = memo((props: any) => {
             <div className="viewport-content"
                 style={getStyle}
             >
-                {inViewport && props?.children}
+                {enterCount >= 1 && <div style={{ display: inViewport ? 'block' : 'none' }} >{props?.children}</div>}
             </div>
         </section>
     )

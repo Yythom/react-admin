@@ -11,6 +11,8 @@ import handleViewport from "react-in-viewport";
 import ViewPort from "@/components/view_port";
 import ErrorBoundary from "@/components/Boundary";
 import SendQuery from "./query";
+import InsetFrom from "@/features/InsetFrom/Form";
+import { Radio } from "@douyinfe/semi-ui";
 const images = [
     "https://picsum.photos/200/300?image=1050",
     //...
@@ -31,13 +33,15 @@ const DemoComponent = memo(() => {
             <SendQuery />
         </ErrorBoundary>
         {/* <MyWrapper /> */}
-        <Editor placeholder="dadwalkdnlk" option={{ minHeight: 1000 }} />
+        {/* <Editor placeholder="dadwalkdnlk" option={{ minHeight: 1000 }} /> */}
         {/* {
-            <Masonry columnsCount={3} >
+            <Masonry columnsCount={4} >
                 {
                     Array.from(new Array(1000).keys()).map(e => {
                         return <ViewPort key={e} height='200px' >
-                            <div style={{ background: 'pink', width: '200px', height: '200px', marginBottom: '30px' }}></div>
+                            <div style={{ background: 'pink', width: '200px', height: '200px', marginBottom: '30px' }}>
+                         
+                            </div>
                         </ViewPort>
                     })
                 }
@@ -85,7 +89,7 @@ const DemoComponent = memo(() => {
             /> */}
         </div>
 
-    </div>
+    </div >
 });
 
 export default DemoComponent;
