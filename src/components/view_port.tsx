@@ -28,7 +28,7 @@ const ViewPort = memo((props: any) => {
     }, [inViewport])
 
     return (
-        <section ref={ref} style={{ minHeight: props.height }}>
+        <section ref={ref} style={{ ...props.style }}>
             <div className="viewport-content"
                 style={getStyle}
             >

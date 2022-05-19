@@ -34,19 +34,19 @@ const DemoComponent = memo(() => {
         </ErrorBoundary>
         {/* <MyWrapper /> */}
         {/* <Editor placeholder="dadwalkdnlk" option={{ minHeight: 1000 }} /> */}
-        {/* {
+        {
             <Masonry columnsCount={4} >
                 {
-                    Array.from(new Array(1000).keys()).map(e => {
-                        return <ViewPort key={e} height='200px' >
-                            <div style={{ background: 'pink', width: '200px', height: '200px', marginBottom: '30px' }}>
-                         
+                    Array.from(new Array(1000).keys()).map((e, i) => {
+                        return <ViewPort key={e} style={{ marginBottom: '30px', height: 200 + i * 20 + 'px' }} >
+                            <div className="fc" style={{ background: 'pink', width: '200px', height: 200 + i * 20 + 'px' }}>
+                                {i}
                             </div>
                         </ViewPort>
                     })
                 }
             </Masonry>
-        } */}
+        }
 
         <div style={{ width: '100px' }}>
             {/* <OssUpload /> */}
