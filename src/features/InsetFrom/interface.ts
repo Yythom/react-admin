@@ -20,6 +20,7 @@ interface InsetFromInterface {
     fetch?: (v: any, reset?: boolean) => void | any | Promise<any>
     onChange?: (v: any) => void,
     onCencel?: () => void,
+    hiddenDefaultButton?: boolean
 }
 
 export default InsetFromInterface;

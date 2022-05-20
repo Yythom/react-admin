@@ -1,6 +1,6 @@
 import { Button, Form } from '@douyinfe/semi-ui';
 import dayjs from 'dayjs';
-import { memo, useMemo, useRef } from 'react';
+import { createContext, memo, useMemo, useState } from 'react';
 import './form.scss'
 import InsetFromInterface from './interface';
 // const _fields: InsetFromInterface['fields'] = [
@@ -20,6 +20,7 @@ import InsetFromInterface from './interface';
 /**    
  * fetch={(v: any, reset) => reset ? initFetch() : fetch({ ...params, search: v })}
  */
+export const FormContext = createContext('')
 const InsetFrom = memo(({
     fields,
     fetch,
@@ -28,16 +29,17 @@ const InsetFrom = memo(({
     children, // 额外操作按钮
     okText,
     cencelText,
-    formItem
+    formItem,
+    hiddenDefaultButton,
 }: InsetFromInterface
 ) => {
-    const form = useRef<any>();
+    const [form, setForm] = useState<any>()
     const Nodes = useMemo(() => {
         return fields?.map(e => (Form as any)[e?.type || 'Input'])
     }, [fields])
     return <div className='InsetFrom'>
         <Form
-            getFormApi={(from) => (form.current = from)}
+            getFormApi={(from) => setForm(from)}
             onChange={(e) => { onChange?.(e.values); }}
             onSubmit={(v: any) => {
                 const p = JSON.parse(JSON.stringify(v))
@@ -76,16 +78,19 @@ const InsetFrom = memo(({
             </div>
 
             <div className="flex button-group" style={{ justifyContent: "flex-end" }}>
-                {
-                    typeof children === 'function' ? children(form.current) : children
-                }
-                <Button htmlType='submit' theme='solid'>{okText || '查找'}</Button>
-                {
-                    cencelText ?
-                        <Button onClick={() => onCencel && onCencel()} >{cencelText}</Button>
-                        : <Button htmlType='reset'>重置</Button>
-                }
+                <FormContext.Provider value={form}>
+                    {children}
+                </FormContext.Provider>
 
+                {
+                    !hiddenDefaultButton && <>
+                        <Button htmlType='submit' theme='solid'>{okText || '查找'}</Button>
+                        {
+                            cencelText ?
+                                <Button onClick={() => onCencel && onCencel()} >{cencelText}</Button>
+                                : <Button htmlType='reset'>重置</Button>
+                        }</>
+                }
             </div>
         </Form>
     </div >

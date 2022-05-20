@@ -13,6 +13,7 @@ import ErrorBoundary from "@/components/Boundary";
 import SendQuery from "./query";
 import InsetFrom from "@/features/InsetFrom/Form";
 import { Radio } from "@douyinfe/semi-ui";
+import InfiniFrom from "./forms";
 const images = [
     "https://picsum.photos/200/300?image=1050",
     //...
@@ -34,10 +35,11 @@ const DemoComponent = memo(() => {
         </ErrorBoundary>
         {/* <MyWrapper /> */}
         {/* <Editor placeholder="dadwalkdnlk" option={{ minHeight: 1000 }} /> */}
-        {
+        <InfiniFrom />
+        {/* {
             <Masonry columnsCount={4} >
                 {
-                    Array.from(new Array(1000).keys()).map((e, i) => {
+                    Array.from(new Array(100).keys()).map((e, i) => {
                         return <ViewPort key={e} style={{ marginBottom: '30px', height: 200 + i * 20 + 'px' }} >
                             <div className="fc" style={{ background: 'pink', width: '200px', height: 200 + i * 20 + 'px' }}>
                                 {i}
@@ -46,7 +48,7 @@ const DemoComponent = memo(() => {
                     })
                 }
             </Masonry>
-        }
+        } */}
 
         <div style={{ width: '100px' }}>
             {/* <OssUpload /> */}
