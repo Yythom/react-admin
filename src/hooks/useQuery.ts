@@ -54,7 +54,7 @@ const useQuery = <T, P>(
             return await http({ body: _params })
         },
         {
-            enabled: options?.onwerRun || true,
+            enabled: !options?.onwerRun,
             onError: () => {
                 options?.onError?.()
             },
