@@ -1,19 +1,29 @@
 import store from "@/store";
 import { Button, Modal, Notification } from "@douyinfe/semi-ui";
+import { useState } from "react";
 import { Provider } from "react-redux";
 
 function showNotic(type = 'success', opt = { content: ` ` }) {
 	Notification[type](opt)
 }
+const ctro = []
+export const closeModal = async (isFetch = false) => {
+	if (isFetch) {
+		await ctro[ctro.length - 1].close()
+	} else {
+		ctro[ctro.length - 1].destroy()
+		ctro.splice(ctro.length - 1, 1)
+	}
+}
 const ProModal = (Content, title, cb = function () { }, Footer = null,) => {
 	const initProps = {
 		icon: false,
 	};
-
 	const _modal = Modal.info({
 		...initProps,
 		onCancel: () => {
-			_modal.destroy()
+			ctro[ctro.length - 1].destroy()
+			ctro.splice(ctro.length - 1, 1)
 		},
 		title,
 		content: <Provider store={store}>{Content}</Provider>,
@@ -21,34 +31,42 @@ const ProModal = (Content, title, cb = function () { }, Footer = null,) => {
 			return Footer;
 		} : null,
 	});
-	ModalFooter.close = async (custom_run) => {
-		if (!custom_run) await cb()
-		else
-			if (typeof custom_run === 'function') {
-				custom_run()
-			}
-		_modal.destroy()
-	}
+
+	ctro.push((() => {
+		const modalOpenItem = { ..._modal, }
+		modalOpenItem.close = async () => {
+			await cb()
+			modalOpenItem.destroy()
+		}
+		return { ...modalOpenItem }
+	})());
 };
 
 const ModalFooter = ({ onOk }) => {
+	const [loading, setLoading] = useState(false)
+
 	return <div className="modal-footer flex" style={{ justifyContent: 'flex-end', padding: '2rem 0 ' }}>
 		<Button
 			style={{ marginRight: '1rem' }}
-			onClick={async () => await ModalFooter.close()}>
+			onClick={async () => await ctro[ctro.length - 1].destroy()}>
 			cencel
 		</Button>
 		<Button
+			loading={loading}
+			style={{ background: loading && '#ccc' }}
 			theme='solid'
 			onClick={async () => {
+				if (loading) return
+				setLoading(true)
 				await onOk();
-				await ModalFooter.close();
+				ctro[ctro.length - 1].close();
+				ctro.splice(ctro.length - 1, 1)
+				setLoading(false)
 			}}>
 			confirm
 		</Button>
 	</div>
 }
-ModalFooter.close = async (custom_run) => Promise.resolve(true)
 
 export {
 	showNotic,

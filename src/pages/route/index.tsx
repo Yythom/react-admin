@@ -1,8 +1,9 @@
+import { ReactNode } from "react";
 import {
     Route,
 } from "react-router-dom";
-import ProTable from "../main/table/table";
-export const basePath = '/index/';
+import HomePage from "../home";
+export const basePath = '/';
 
 const setPagePath = (_path: string) => {
     return `${basePath}${_path}`
@@ -11,61 +12,20 @@ export interface RouteItemInterface {
     text: string,
     itemKey: string,
     icon: string,
-    items?: {
-        text: string,
-        itemKey: string,
-        icon: string,
-    }[]
+    comp?: ReactNode | JSX.Element
 }
 
 const menu_route: RouteItemInterface[] = [
     {
-        text: '系统测试',
+        text: '首页',
         icon: 'iconshezhi',
-        itemKey: 'system',
-        items: [{
-            itemKey: 'system/demo', //地址本 
-            icon: 'iconjigouguanli',
-            text: '测试',
-        }]
-    },
-    {
-        text: '表单',
-        icon: 'iconshangsheng',
-        itemKey: 'table',
+        itemKey: 'home',
+        comp: <Route path={setPagePath('home')} exact component={HomePage} />
     },
 ];
 
-// 此处应为请求
-const get_menu_route: () => Promise<RouteItemInterface[]> = async () => {
-    return new Promise<RouteItemInterface[]>((resolve, reject) => {
-        setTimeout(() => {
-            resolve(menu_route);
-        }, 200);
-    })
-}
-
-
-const RouteComponentsMap: {
-    [key: string]: {
-        text: string;
-        component: JSX.Element;
-    }
-} = {
-    'table': {
-        text: '表单页',
-        component: <Route path={setPagePath('table')} exact component={() => <div>111</div>} />
-    },
-    // 'system/demo': {
-    //     text: 'demo测试',
-    //     component: <CacheRoute exact path={setPagePath('system/demo')} >
-    //         <DemoComponent />
-    //     </CacheRoute >
-    // }
-}
 
 export {
     setPagePath,
-    get_menu_route
 }
-export default RouteComponentsMap;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+export default menu_route;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       

@@ -1,57 +1,58 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
-
+import {
+    useHistory,
+} from "react-router-dom";
 import { stopInterval } from "../../utils/js_utils/interval";
 import './index.scss'
 import useSlice from "../../hooks/useSlice";
-import { actions, GlobalStateInterface } from "../../store/global_slice";
-import useRequest from "../../hooks/useRequest";
-import { Button, Input } from "@douyinfe/semi-ui";
+import { GlobalStateInterface } from "../../store/global_slice";
 import { basePath } from "../route";
-import Logo from "../../global-component/logo";
-import { useEffect } from "react";
-import sha1 from 'sha1';
-import { postApiV1AdminProfileLogin, PostApiV1AdminProfileLoginOption, PostApiV1AdminProfileLoginResponseSuccess, ProfileLoginRequest, ProfileLoginResponse } from "@/service/demo";
+import { Button } from "react-vant";
+import Logo from "@/features/logo";
+import { useQuery } from "@/hooks/useQuery";
 
 const Login = () => {
     stopInterval()
     const [global_slice, dispatch] = useSlice<GlobalStateInterface>();
-    // const history = useHistory()
-
-    const [ret, login, setParams, loading, params] = useRequest
-        <ProfileLoginResponse, ProfileLoginRequest>
-        (
-            postApiV1AdminProfileLogin,
-            {
-                start_owner: true,
-                initParams: false,
-                callback: (data: any) => {
-                    // history.replace(basePath)
-
-                    // Storage.setStorageSync('token', data?.token)
-                }
-            })
-        ;
+    const history = useHistory()
+    const [data, params, setParams, { fetch, fetchPage, loading }] = useQuery<any, any>(
+        async function name(params) {
+            console.log('接收到的', params);
+            history.replace('home')
+            return true
+        },
+        {
+            initParams: {
+                "password": "7c222fb2927d828af22f592134e8932480637c0d",
+                "account": "superadmin",
+                page: 1
+            } as any,
+            onwerRun: true,
+            onSuccess: () => {
+                // history.replace(basePath)
+            }
+        }
+    )
 
     return (
         <div className='login fdc'>
             <Logo />
             <div className="fdc" style={{ marginTop: '3rem' }}>
-                <Input
+                <input
                     value={params?.account}
                     prefix='账号：'
-                    onChange={(e) => setParams('account', e)}
+                    onChange={(e) => setParams('account', e.target.value)}
                 />
-                <Input
+                <input
                     value={params?.password}
                     type='password'
-                    prefix='密码：'
-                    onChange={(e) => setParams('password', e)}
+                    onChange={(e) => setParams('password', e.target.value)}
                 />
                 <Button
                     loading={loading}
                     className="btn"
-                    onClick={() => login()}
+                    onClick={() => fetch()}
                 >
                     登录
                 </Button>

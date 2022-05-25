@@ -1,92 +1,53 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useLayoutEffect, useState } from "react";
-import { Nav, } from "@douyinfe/semi-ui";
+import { useHistory } from 'react-router-dom';
 import { stopInterval } from "../../utils/js_utils/interval";
 import useSlice from "../../hooks/useSlice";
 import Storage from "../../utils/js_utils/storage";
 import { actions, GlobalStateInterface } from "../../store/global_slice";
-import './index.scss'
-import { basePath, } from "../route";
-import Icon from "../../global-component/icon";
-import { useHistory } from 'react-router-dom'
-import { IconSetting, IconStar, IconUser } from "@douyinfe/semi-ui/node_modules/@douyinfe/semi-icons";
+import menu_route, { basePath, } from "../route";
+import Icon from "../../components/icon";
 
+const tabHeight = '60px'
 const Menu = () => {
     const history = useHistory()
     const [global_slice, dispatch] = useSlice<GlobalStateInterface>();
     const path = history.location.pathname.split('/').join('/').replace(basePath, '');
-    const [menu, setmenu] = useState(path || '');
-
-    useLayoutEffect(() => {
-        dispatch(actions.getMenuRouteAsync())
-    }, [])
-    console.log(global_slice);
-
-    return <div className="fdc" style={{ height: '100%' }}>
 
 
-    </div>
     return (
-        <div className="fdc" style={{ height: '100%' }}>
-            <Nav
-                defaultOpenKeys={Storage.getStorageSync('openKeys') || []}
-                selectedKeys={[menu]}
-                style={{ height: '100%', border: 'none' }}
-                onClick={(el: any) => {
-                    if (!el?.openKeys) {
-                        stopInterval() // 重置全局轮训
-                        setmenu(el.itemKey)
-                        history.push(basePath + el.itemKey)
-                        // history.push(basePath + el.itemKey)
-                    } else {
-                        Storage.setStorageSync('openKeys', el.openKeys);
-                    }
-                }}
-                footer={{
-                    collapseButton: true,
-                }}
-            >
-                <Nav.Header
-                    // eslint-disable-next-line jsx-a11y/alt-text
-                    logo={<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F07%2Faa%2F5b%2F07aa5bb71261cba6540c1b750dac7690.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1650087669&t=a8692e46abf591e4ac3bddb972e17172" />}
-                    text={'admin'}
-                />
+        <>
+            <div style={{ height: `calc(2rem + ${tabHeight})`, }}></div>
+            <div className="flex" style={{
+                position: 'fixed',
+                bottom: 0,
+                width: '100vw',
+                height: tabHeight,
+                left: 0,
+                background: global_slice?.mode === 'light' ? '#fff' : '#000',
+                color: global_slice?.mode === 'light' ? '#333' : '#eee',
+            }} >
                 {
-                    global_slice.user_route.map(item => {
-                        if (item.items) {
-                            return <Nav.Sub
+                    menu_route.map(item => {
+                        return (
+                            <div
                                 key={item.itemKey}
-                                itemKey={item.itemKey}
-                                text={item.text}
-                                icon={<Icon icon={item.icon} />}
+                                className='fdc'
+                                style={{ flex: 1 }}
+                                onClick={(el: any) => {
+                                    stopInterval() // 重置全局轮训
+                                    history.push(basePath + item.itemKey)
+                                }}
                             >
-                                {item.items.map(child =>
-                                    <Nav.Item
-                                        style={{
-                                            width: 'calc(100% - 5rem)',
-                                            marginLeft: '3rem'
-                                        }}
-                                        key={child.itemKey}
-                                        itemKey={child.itemKey}
-                                        text={child.text}
-                                        icon={<Icon icon={child.icon} />}
-                                    />
-                                )}
-                            </Nav.Sub>
-                        } else {
-                            return <Nav.Item
-                                key={item.itemKey}
-                                itemKey={item.itemKey}
-                                text={item.text}
-                                icon={<Icon icon={item.icon} />}
-                            />
-                        }
+                                <Icon icon={item.icon} />
+                                <div> {item.text}</div>
+                            </div>
+                        )
                     })
                 }
-            </Nav>
-        </div >
-
+            </div>
+        </>
     );
 }
 

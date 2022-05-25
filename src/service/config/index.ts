@@ -1,4 +1,3 @@
-import { Toast } from '@douyinfe/semi-ui'
 import axios, { AxiosRequestConfig } from 'axios'
 import Storage from '../../utils/js_utils/storage'
 import { baseURL, timeout } from './config'
@@ -53,7 +52,7 @@ function request<T>(url: string, config: AxiosRequestConfig): Promise<T | undefi
                     //     window.location.href = window.location.origin;
                     // }, 2000);
                 } else {
-                    Toast.warning(opts);
+                    // Toast.warning(opts);
                 }
             }
         }).catch(err => {

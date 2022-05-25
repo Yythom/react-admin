@@ -62,7 +62,7 @@ body[theme-mode="dark"] {
   }
 
   .page {
-    height: calc(100% - 8rem);
+    height: 100%;
 
     .menu,
     .main {
@@ -71,9 +71,7 @@ body[theme-mode="dark"] {
     }
 
     .main {
-      padding: 1rem;
       box-sizing: border-box;
-      flex: 1;
       background-color: #F4F6F8;
     }
   }

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { get_menu_route, RouteItemInterface } from '../pages/route';
+import menu_route, { RouteItemInterface } from '../pages/route';
 type mode = 'light' | 'dark' | string
 type lang = 'zh_CN' | 'en_US' | string
 
@@ -25,7 +25,7 @@ const reducers = {
 const getMenuRouteAsync = createAsyncThunk(
     'global/get_menu_route',
     async () => { // data 微信获取到的信息
-        let res = await get_menu_route()
+        let res = await menu_route
         return res
     }
 )

@@ -22,11 +22,6 @@ function formatUrl() {
 function randomFrom(lowerValue, upperValue) {
     return Math.floor(Math.random() * (upperValue - lowerValue + 1) + lowerValue);
 }
-/**
-   * 手机号验证
-   * @param tel
-   */
-const isMobile = (s) => /^1[3-9][0-9]{9}$/.test(s);
 
 function debounce(func, threshold = 500, immediate = false) {
     if (typeof func !== "function") {
@@ -51,6 +46,5 @@ function debounce(func, threshold = 500, immediate = false) {
 export {
     formatUrl,
     randomFrom,
-    isMobile,
     debounce,
 }
