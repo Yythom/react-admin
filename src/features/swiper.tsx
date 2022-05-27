@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Swiper as Origin } from "react-vant";
 
-const Swiper = memo(() => {
+const Swiper = memo((props) => {
 
     return (
         <div

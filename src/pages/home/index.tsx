@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NavHeader } from '@/App';
 import { memo } from 'react';
 import { Grid, ProductCard, Tabs } from 'react-vant';

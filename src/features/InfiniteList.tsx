@@ -1,7 +1,7 @@
 import { debounce } from "@/utils/js_utils/format";
 import React, { memo, useRef, useState } from "react";
 import InfiniteScroll from 'react-infinite-scroller'
-import { Circle, Loading, } from "react-vant";
+import { Loading, } from "react-vant";
 
 // <InfiniteList
 //     h='calc(50vh)'
@@ -30,24 +30,12 @@ const InfiniteList = memo(({
     const startRef = useRef<number>(0)
     const scrollRef = useRef<number>(0)
 
-    const [action, setAction] = useState<'Refresh' | '' | 'refresh_loading'>('')
     const [refresh, setRefresh] = useState<number>(0)
 
     const ref = useRef<any>()
+
     return (
         <>
-            {
-                refresh > 0 &&
-                <div className="fc">
-                    <Circle rate={(refresh / distance) * 100} style={{ margin: 5 }} size={30} />
-                </div>
-            }
-            {
-                action === 'refresh_loading' && loading &&
-                <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-                    <Loading type="spinner" color="#3f45ff" />
-                </div>
-            }
             <div
                 className="infinite-list"
                 ref={ref}
@@ -56,9 +44,8 @@ const InfiniteList = memo(({
                     startRef.current = startY
                 }}
                 onTouchEnd={() => {
-                    setAction('refresh_loading')
+                    if (distance <= refresh) init()
                     setRefresh(0)
-                    init()
                 }}
                 onScroll={(e) => {
                     scrollRef.current = (e.target as any).scrollTop
@@ -75,9 +62,35 @@ const InfiniteList = memo(({
                 style={{
                     overflow: 'auto', paddingBottom: '3rem', boxSizing: 'border-box',
                     height: h,
-                    borderRadius: '3rem'
+                    borderRadius: '3rem',
+                    position: 'relative',
+                    transition: '400ms'
                 }}
             >
+                {
+                    loading ?
+                        <div
+                            className="loading_status fc"
+                            style={{
+                                height: loading ? '50px' : '0px',
+                                transition: '200ms',
+                            }}
+                        >
+                            <div style={{ textAlign: 'center', }}>
+                                {loading && <Loading type="spinner" color="#3f45ff" />}
+                            </div>
+                        </div> :
+                        <div
+                            className="loading_status fc"
+                            style={{
+                                height: '50px',
+                                fontSize: '16px',
+                                marginTop: refresh > 20 ? '0' : '-50px'
+                            }}>
+                            {refresh > 10 && distance > refresh && '下拉刷新'}
+                            {distance <= refresh && '松开刷新'}
+                        </div>
+                }
                 <InfiniteScroll
                     initialLoad={false}
                     pageStart={0}
