@@ -1,5 +1,3 @@
-import { IconUpload } from "@douyinfe/semi-icons";
-import { Button } from "@douyinfe/semi-ui";
 import { memo, useState } from "react";
 import OSS from "./oss";
 
@@ -17,13 +15,11 @@ const OssUpload = memo(({
 
     return <div>
         {
-            max === list.length ? null : <Button
-                icon={<IconUpload />}
-                theme="light"
+            max === list.length ? null : <button
                 onClick={onChange}
             >
                 点击上传
-            </Button>
+            </button>
         }
         <input
             id="pro_upload"

@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.12746df0.chunk.css",
+    "main.js": "/static/js/main.45e87ba9.chunk.js",
+    "runtime-main.js": "/static/js/runtime-main.38d19b00.js",
+    "static/css/2.e248bb9f.chunk.css": "/static/css/2.e248bb9f.chunk.css",
+    "static/js/2.113b2d31.chunk.js": "/static/js/2.113b2d31.chunk.js",
+    "index.html": "/index.html",
+    "static/js/2.113b2d31.chunk.js.LICENSE.txt": "/static/js/2.113b2d31.chunk.js.LICENSE.txt",
+    "static/js/main.45e87ba9.chunk.js.LICENSE.txt": "/static/js/main.45e87ba9.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/static/media/PlusJakartaDisplay-Regular.e8f6d2bd.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.38d19b00.js",
+    "static/css/2.e248bb9f.chunk.css",
+    "static/js/2.113b2d31.chunk.js",
+    "static/css/main.12746df0.chunk.css",
+    "static/js/main.45e87ba9.chunk.js"
+  ]
+}

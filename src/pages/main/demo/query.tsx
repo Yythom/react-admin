@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { useQuery } from '@/hooks/useQuery';
 import { postApiV1AdminProfileLogin, ProfileLoginRequest } from '@/service/demo';
 import { Button } from '@douyinfe/semi-ui';
 import { memo, } from 'react';
+import { useQuery } from 'yyt-hooks';
 const SendQuery = memo(() => {
     const [data, params, setParams, { fetch, fetchPage }] = useQuery<any, ProfileLoginRequest>(
         postApiV1AdminProfileLogin,

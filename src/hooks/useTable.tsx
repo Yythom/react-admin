@@ -2,7 +2,7 @@
 import { ChangeInfo, ColumnProps } from "@douyinfe/semi-ui/lib/es/table";
 import { memo, MemoExoticComponent, useLayoutEffect } from "react";
 import BuildTable from "@/features/BuildTable/BuildTable";
-import useRequest from "./useRequest";
+import { useRequest } from "yyt-hooks";
 useTable.initPage = { // 改1
     page: 1,
     page_size: 10,

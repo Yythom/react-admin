@@ -2,18 +2,18 @@
 import ProEchart from "@/features/echart/pro_echart";
 import React, { memo, useEffect, useState } from "react";
 import './index.scss'
-import { MoveBox, MoveSquare, MoveTigger } from "../../../features/movepophover";
 import OssUpload from "../../../features/oss/oss_upload";
 import Masonry from "react-responsive-masonry"
 import JoditEditor from "jodit-react";
 import Editor from "../../../features/editor";
 import handleViewport from "react-in-viewport";
 import ViewPort from "@/components/view_port";
-import ErrorBoundary from "@/components/Boundary";
 import SendQuery from "./query";
 import InsetFrom from "@/features/InsetFrom/Form";
 import { Radio } from "@douyinfe/semi-ui";
 import InfiniFrom from "./forms";
+import { MoveBox, MoveSquare } from "yyt-features";
+import { ErrorBoundary } from "yyt-hooks";
 const images = [
     "https://picsum.photos/200/300?image=1050",
     //...
@@ -64,12 +64,10 @@ const DemoComponent = memo(() => {
                 }
             </div>
 
-            {/* <MoveBox>
-                <MoveTigger>
-                    移入到此处
-                </MoveTigger>
+            <MoveBox>
+                移入到此处
                 <MoveSquare>1923890</MoveSquare>
-            </MoveBox> */}
+            </MoveBox>
 
 
             {/* <ProEchart

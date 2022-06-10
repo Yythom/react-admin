@@ -1,5 +1,4 @@
 import { debounce } from "@/utils/js_utils/format";
-import { Spin } from "@douyinfe/semi-ui";
 import React, { memo } from "react";
 import InfiniteScroll from 'react-infinite-scroller'
 
@@ -37,7 +36,7 @@ const ProList = memo(({
             {children}
             {loading && (
                 <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-                    <Spin size='large' />
+                    loading
                 </div>
             )}
             {noMore && (
