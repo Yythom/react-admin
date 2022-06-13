@@ -1,6 +1,6 @@
 import { ConfigProvider, LocaleProvider } from "@douyinfe/semi-ui";
 import { memo } from "react";
-import useSlice from "../hooks/useSlice";
+import { useSlice } from "yyt-hooks";
 import { GlobalStateInterface } from "../store/global_slice";
 import loacl from "./semi-ui-local";
 

@@ -1,7 +1,7 @@
 import { Breadcrumb } from "@douyinfe/semi-ui";
 import { memo, useMemo } from "react";
 import { useHistory } from "react-router-dom";
-import useSlice from "../hooks/useSlice";
+import { useSlice } from "yyt-hooks";
 import { basePath, RouteItemInterface } from "../pages/route";
 import { GlobalStateInterface } from "../store/global_slice";
 

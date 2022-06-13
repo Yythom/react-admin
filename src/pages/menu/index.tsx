@@ -4,12 +4,12 @@ import { useLayoutEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import { Nav, } from "@douyinfe/semi-ui";
 import { stopInterval } from "../../utils/js_utils/interval";
-import useSlice from "../../hooks/useSlice";
 import Storage from "../../utils/js_utils/storage";
 import { actions, GlobalStateInterface } from "../../store/global_slice";
 import './index.scss'
 import { basePath, } from "../route";
 import Icon from "../../components/icon";
+import { useSlice } from "yyt-hooks";
 
 const Menu = () => {
     const history = useHistory()

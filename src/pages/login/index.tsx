@@ -5,15 +5,14 @@ import {
 } from "react-router-dom";
 import { stopInterval } from "../../utils/js_utils/interval";
 import './index.scss'
-import useSlice from "../../hooks/useSlice";
 import { actions, GlobalStateInterface } from "../../store/global_slice";
 import { Button, Input } from "@douyinfe/semi-ui";
 import { basePath } from "../route";
-import Logo from "../../features/logo";
 import { useEffect } from "react";
 import sha1 from 'sha1';
 import { postApiV1AdminProfileLogin, PostApiV1AdminProfileLoginOption, PostApiV1AdminProfileLoginResponseSuccess, ProfileLoginRequest, ProfileLoginResponse } from "@/service/demo";
-import { useRequest } from "yyt-hooks";
+import { useRequest, useSlice } from "yyt-hooks";
+import { Logo } from "yyt-features";
 
 const Login = () => {
     stopInterval()

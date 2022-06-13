@@ -8,7 +8,7 @@ import './App.scss'
 import './var.scss'
 import './font/iconfont.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import ErrorBoundary from './components/Boundary';
+import { ErrorBoundary } from 'yyt-hooks';
 dayjs.locale('zh-cn');
 
 if (process?.env?.NODE_ENV !== "development") window.console.log = () => { }

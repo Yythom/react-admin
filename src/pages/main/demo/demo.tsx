@@ -2,10 +2,10 @@
 import ProEchart from "@/features/echart/pro_echart";
 import React, { memo, useEffect, useState } from "react";
 import './index.scss'
-import OssUpload from "../../../features/oss/oss_upload";
+import OssUpload from "yyt-features";
 import Masonry from "react-responsive-masonry"
 import JoditEditor from "jodit-react";
-import Editor from "../../../features/editor";
+import Editor from "yyt-features";
 import handleViewport from "react-in-viewport";
 import ViewPort from "@/components/view_port";
 import SendQuery from "./query";

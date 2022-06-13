@@ -9,13 +9,13 @@ import intl from 'react-intl-universal'
 import zh_CN from '@/lang/zh_CN'
 import en_US from '@/lang/en_US'
 import Login from "@/pages/login";
-import Logo from "@/features/logo";
 import { GlobalStateInterface } from "@/store/global_slice";
-import useSlice from "@/hooks/useSlice";
 import ThemeMode from "@/components/theme_mode";
 import RouteComponentsMap, { basePath } from "@/pages/route";
 import ProBreadcrumb from "@/features/pro_breadcrumb";
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { Logo } from "yyt-features";
+import { useSlice } from "yyt-hooks";
 
 const header = memo(() =>
   <div className="header fb">

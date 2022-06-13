@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Switch } from "@douyinfe/semi-ui";
 import { memo } from "react";
-import useSlice from "../hooks/useSlice";
+import { useSlice } from "yyt-hooks";
 import { actions } from "../store/global_slice";
 
 const ThemeMode = memo(() => {
