@@ -44,13 +44,13 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        <Route path={basePath} component={header} />
+        {/* <Route path={basePath} component={header} /> */}
         <div className="page flex">
-          <div className="menu">
+          {/* <div className="menu">
             <Route path={basePath} component={Menu} />
-          </div>
+          </div> */}
           <Route path='/' exact component={Login} />
-          <div className="main">
+          {/* <div className="main">
             <Route path={basePath} component={ProBreadcrumb} />
             {
               global_slice.user_route.map(e => {
@@ -66,7 +66,7 @@ const App = () => {
                 </Fragment>
               })
             }
-          </div>
+          </div>*/}
         </div>
       </Router >
       {
