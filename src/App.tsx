@@ -1,19 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import { BrowserRouter, Routes, useRoutes } from "react-router-dom";
 import { Boundary } from "./components";
 import { useQuery } from "./hooks";
+import Component from "./routes";
+import routes from "./routes";
 import { postApiV1AdminProfileLogin, ProfileLoginRequest, ProfileLoginResponse } from "./service/apis";
 
 const ReqDemo = () => {
   const [data, params, setParams, { fetch, fetchPage }] = useQuery<ProfileLoginResponse, ProfileLoginRequest>(
     postApiV1AdminProfileLogin,
-    {
-      initParams: {
-        "password": "7c222fb2927d828af22f592134e8932480637c0d",
-        "account": "superadmin",
-        page: 1
-      } as any,
-    }
   )
   console.log(data);
 
@@ -34,12 +30,12 @@ const ReqDemo = () => {
 }
 
 function App() {
+
   return (
     <div className="App">
-      12312
-      <Boundary>
-        <ReqDemo />
-      </Boundary>
+      <BrowserRouter>
+        <Component />
+      </BrowserRouter>
     </div>
   );
 }
