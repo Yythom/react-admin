@@ -1,19 +1,55 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Boundary, BoundaryConfigProvider, CSSReset, ErrorFallback } from './components';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ChakraProvider } from '@chakra-ui/react';
+import theme from './theme';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 3 * 1000 * 60,
+      suspense: true,
+      retry: false,
+      refetchOnWindowFocus: false,
+      networkMode: 'always',
+      // keepPreviousData: true,
+    },
+    mutations: {
+      networkMode: 'always',
+    },
+  }
+})
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <BoundaryConfigProvider
+    pendingFallback={null}
+    FallbackComponent={ErrorFallback}
+    onError={(error: any, { componentStack }: any) => {
+      // const errorBoundaryError = new Error(error.message)
+      // errorBoundaryError.name = `React ErrorBoundary Error`
+      // errorBoundaryError.stack = componentStack
+      // error.cause = errorBoundaryError
+      // throw error
+      // console.error('log to sentry', error)
+      // console.error('----', componentStack)
+    }}
+  >
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider theme={theme}>
+        <CSSReset />
+        <Boundary fallback={null}>
+          <App />
+          <ReactQueryDevtools />
+        </Boundary>
+      </ChakraProvider>
+    </QueryClientProvider>
+  </BoundaryConfigProvider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
+// reportWebVitals();
