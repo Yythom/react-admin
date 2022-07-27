@@ -3,7 +3,7 @@
 import { CSSProperties, memo, useMemo, useRef } from "react";
 import { useInViewport } from "react-in-viewport";
 
-const ViewPort = memo((props: any) => {
+export const ViewPort = memo((props: any) => {
     const ref = useRef<HTMLElement>(null);
     const {
         inViewport, // 是否在视窗
@@ -36,7 +36,4 @@ const ViewPort = memo((props: any) => {
             </div>
         </section>
     )
-})
-
-
-export default ViewPort;
+}) 
