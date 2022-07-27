@@ -1,4 +1,4 @@
-import { Box, Button, Input, } from '@chakra-ui/react';
+import { Box, Button, Input, Switch, } from '@chakra-ui/react';
 import React, { useMemo } from 'react';
 import { Form, FormControl, FormError, FormField, FormTable, FormTableInterface, useForm, } from '../../components';
 
@@ -34,6 +34,11 @@ const Index = () => {
         defaultValues: {
             a: 'asc',
         },
+        rules: {
+            search: {
+                required: '12321'
+            }
+        }
     })
 
     const column: FormTableInterface<DataType>['column'] = useMemo(() => {
@@ -47,12 +52,12 @@ const Index = () => {
             {
                 title: "B",
                 dataIndex: 'b',
-                render: (data, record) => <>{data} 自定义渲染</>
+                render: (data, record) => <>{data}  <Switch /></>
             },
             {
                 title: "C",
                 dataIndex: 'c',
-                render: (data, record) => <>{data} 自定义渲染</>
+                render: (data, record) => <>{data} <Input /></>
             }
         ]
     }, [])
