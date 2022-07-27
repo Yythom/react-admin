@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import { Button, list, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react";
+import { createContext, ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { BrowserRouter, Routes, useRoutes } from "react-router-dom";
+import { useToggle } from "react-use";
 import { Boundary } from "./components";
+import { ModalControl } from "./feature";
 import { useQuery } from "./hooks";
 import Component from "./routes";
 import routes from "./routes";
@@ -33,6 +37,8 @@ function App() {
 
   return (
     <div className="App">
+      <ModalControl />
+
       <BrowserRouter>
         <Component />
       </BrowserRouter>

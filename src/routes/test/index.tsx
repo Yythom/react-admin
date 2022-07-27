@@ -1,6 +1,7 @@
 import { Box, Button, Input, Switch, } from '@chakra-ui/react';
 import React, { useMemo } from 'react';
 import { Form, FormControl, FormError, FormField, FormTable, FormTableInterface, useForm, } from '../../components';
+import { Modal } from '../../feature';
 
 // 自己定义search的东西
 interface IForm {
@@ -29,6 +30,7 @@ const data = [
 type DataType = typeof data
 
 const Index = () => {
+
     const form = useForm<IForm>({
         mode: 'onChange',
         defaultValues: {
@@ -70,6 +72,7 @@ const Index = () => {
     return (
         <>
             <Form form={form}>
+                <Button onClick={() => Modal.openModal()}>打开一个modal</Button>
                 <Box w="100%" m='20px 0' bg='blackAlpha.600' borderRadius="8px">
                     <FormControl name="search">
                         <FormField>
