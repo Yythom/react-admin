@@ -2,7 +2,6 @@ import { Box, Button, Input, } from '@chakra-ui/react';
 import React, { useMemo } from 'react';
 import { Form, FormControl, FormError, FormField, FormTable, FormTableInterface, useForm, } from '../../components';
 
-
 // 自己定义search的东西
 interface IForm {
     search: string
