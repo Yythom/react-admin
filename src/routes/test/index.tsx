@@ -70,7 +70,7 @@ const Index = () => {
     const onSubmit = (data: unknown) => console.log(data)
 
     const [pageData, setPage] = useState({
-        page: 16, pageSize: 10, total: 200
+        page: 1, pageSize: 10, total: 80
     })
     const ref = useRef<any>()
     return (
@@ -115,14 +115,14 @@ const PPagination = ({
         total: 100
     }
 }: any) => {
-    // https://pagination-react-component.vercel.app/demo/more
     const num: any[] = useMemo(() => {
         const max = 7
         let preMore = false
         const initArr = Array.from(new Array(data?.total / data?.pageSize).keys())
         const init = initArr.map(e => {
+            if (initArr.length <= max) return e + 1
+            if (e === 0) return 1
             if (initArr.length > max && data.page < initArr.length - 3) {
-                if (e === 0) return 1
                 if (data.page > (max - 3) && e !== 0 && e !== initArr.length - 1) {
                     if (!preMore && e !== 1) {
                         preMore = true
