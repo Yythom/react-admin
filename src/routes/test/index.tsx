@@ -1,6 +1,6 @@
-import { Box, Button, Input, Switch, } from '@chakra-ui/react';
-import React, { useMemo } from 'react';
-import { Form, FormControl, FormError, FormField, FormTable, FormTableInterface, useForm, } from '../../components';
+import { Box, Button, Center, Flex, HStack, Input, Switch, } from '@chakra-ui/react';
+import React, { useMemo, useRef, useState } from 'react';
+import { ArrowIcon, Form, FormControl, FormError, FormField, FormTable, FormTableInterface, useForm, } from '../../components';
 import { Modal } from '../../feature';
 
 // 自己定义search的东西
@@ -69,9 +69,13 @@ const Index = () => {
 
     const onSubmit = (data: unknown) => console.log(data)
 
+    const [pageData, setPage] = useState({
+        page: 16, pageSize: 10, total: 200
+    })
+    const ref = useRef<any>()
     return (
         <>
-            <Form form={form}>
+            {/* <Form form={form}>
                 <Button onClick={() => Modal.openModal()}>打开一个modal</Button>
                 <Box w="100%" m='20px 0' bg='blackAlpha.600' borderRadius="8px">
                     <FormControl name="search">
@@ -88,9 +92,114 @@ const Index = () => {
                     data={data}
                     column={column}
                 />
-            </Form>
+            </Form> */}
+
+
+            <PPagination data={pageData} onChange={({ page, pageSize }: any) => {
+                console.log({ ...pageData, page, pageSize });
+                setPage({ ...pageData, page, pageSize })
+
+            }} />
         </>
 
+    )
+}
+
+const PPagination = ({
+    mode = '',
+    max = 6,
+    onChange = () => { },
+    data = {
+        page: 1,
+        pageSize: 10,
+        total: 100
+    }
+}: any) => {
+    // https://pagination-react-component.vercel.app/demo/more
+    const num: any[] = useMemo(() => {
+        const max = 7
+        let preMore = false
+        const initArr = Array.from(new Array(data?.total / data?.pageSize).keys())
+        const init = initArr.map(e => {
+            if (initArr.length > max && data.page < initArr.length - 3) {
+                if (e === 0) return 1
+                if (data.page > (max - 3) && e !== 0 && e !== initArr.length - 1) {
+                    if (!preMore && e !== 1) {
+                        preMore = true
+                        return '...'
+                    }
+                    if (e === data.page - 1 || e === data.page + 1 || e === data.page) {
+                        return e
+                    }
+                    if (e === initArr.length - 2) {
+                        return '...'
+                    }
+                    return undefined
+                }
+            }
+            if (initArr.length > max && data.page > initArr.length - 5) {
+                if (e === 2) return '...'
+                if (e > initArr.length - 6) {
+                    return e + 1
+                } else {
+                    return undefined
+                }
+
+            }
+            if (data.page <= 3) {
+                console.log('data.page <= 3');
+                if (e === max - 3) return '...'
+                if (e >= max) return undefined
+                if (e > max - 3 && e < max) {
+                    return initArr[initArr.length - (max - e)] + 1
+                }
+            }
+            if (data.page === 4) {
+                console.log('data.page = 4');
+                if (e === max - 2) return '...'
+                if (e >= max) return undefined
+                if (e > max - 3 && e < max) {
+                    return initArr[initArr.length - (max - e)] + 1
+                }
+            }
+            return e + 1
+        })
+        return init.filter(Boolean)
+    }, [data])
+
+    return (
+        <Center>
+            <Box>共{data.total / data.pageSize}页</Box>
+            <HStack>
+                <Button colorScheme='gray' >
+                    <ArrowIcon direction='left' />
+                </Button>
+
+                <HStack spacing='24px'>
+                    {
+                        num.map((e, i) => {
+                            return (
+                                <Button
+                                    key={i}
+                                    bg={data.page === e ? 'gray.500' : ''}
+                                    variant='ghost'
+                                    colorScheme='gray'
+                                    onClick={() => {
+                                        if (e !== '...') onChange({ page: e, pageSize: data.pageSize })
+                                    }}
+                                >
+                                    {e}
+                                </Button>
+                            )
+                        })
+                    }
+                </HStack>
+
+                <Button colorScheme='gray' >
+                    <ArrowIcon direction='right' />
+                </Button>
+            </HStack>
+        </Center>
     )
 }
 
