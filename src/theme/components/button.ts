@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { transparentize } from '@chakra-ui/theme-tools'
 import type {
@@ -281,7 +282,7 @@ const sizes: Record<string, SystemStyleObject> = {
 
 const defaultProps = {
     variant: 'solid',
-    size: 'lg',
+    size: 'xs',
     colorScheme: 'gray',
 }
 

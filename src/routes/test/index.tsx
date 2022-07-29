@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Box, Button, Center, Flex, HStack, Input, Switch, } from '@chakra-ui/react';
 import React, { useMemo, useRef, useState } from 'react';
 import { ArrowIcon, Form, FormControl, FormError, FormField, FormTable, FormTableInterface, Pagination, Select, SelectInput, SelectOption, SelectPopover, useForm, } from '../../components';
@@ -77,7 +78,7 @@ const Index = () => {
     const onSubmit = (data: unknown) => console.log(data)
 
     const [pageData, setPage] = useState({
-        page: 1, pageSize: 10, total: 80
+        page: 1, pageSize: 10, total: 200
     })
     const ref = useRef<any>()
     return (
@@ -116,7 +117,6 @@ const Index = () => {
             <Select value={value} onChange={(selectValue: any) => {
                 console.log(selectValue);
                 setValue(selectValue)
-
             }}>
                 <SelectInput placeholder='请选择' />
                 <SelectPopover w='400px'>

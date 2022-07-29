@@ -1,6 +1,5 @@
-import { Box, chakra, Button, forwardRef, Input, InputGroup, InputRightElement, Popover, PopoverContent, PopoverContentProps, PopoverProps, PopoverTrigger, HTMLChakraProps } from "@chakra-ui/react"
-import { createContext, useContext, useState } from "react"
-import { useToggle } from "react-use"
+import { Box, chakra, forwardRef, InputGroup, InputRightElement, Popover, PopoverContent, PopoverContentProps, PopoverProps, PopoverTrigger, HTMLChakraProps, LayoutProps, TypographyProps } from "@chakra-ui/react"
+import { createContext, useContext } from "react"
 import { ArrowIcon } from "../icon"
 import { SelectInputProps } from "./type"
 
@@ -52,18 +51,23 @@ export const SelectInputInner = forwardRef<SelectInputProps, 'input'>((props, re
         </InputGroup>
     )
 })
-export const Select = (props: PopoverProps & { children: any, value: any, onChange: any }) => {
+export const Select = ({
+    children,
+    onChange,
+    value,
+    ...rest
+}: PopoverProps & { children: any, value: any, onChange: any }) => {
     return (
-        <Popover >
+        <Popover {...rest} >
             {({ isOpen, onClose }) => {
                 return <SelectContext.Provider
                     value={{
-                        value: props.value,
-                        setValue: props.onChange,
+                        value: value,
+                        setValue: onChange,
                         isOpen,
                         onClose,
                     }}>
-                    {props.children}
+                    {children}
                 </SelectContext.Provider>
             }}
         </Popover>
@@ -73,7 +77,7 @@ export const Select = (props: PopoverProps & { children: any, value: any, onChan
 export const SelectInput = forwardRef<SelectInputProps, 'input'>((props, ref) => {
     return (
         <PopoverTrigger>
-            <SelectInputInner {...props} ref={ref} />
+            {props.children || <SelectInputInner {...props} ref={ref} />}
         </PopoverTrigger>
     )
 })
@@ -92,9 +96,8 @@ export const SelectOption = ({ children, value, ...rest }: any) => {
         <Box
             bg={value === ctx.value ? 'gray.400' : ''}
             _hover={{ bg: 'gray.200' }}
+            {...rest}
             onClick={() => {
-                console.log(value);
-
                 ctx.setValue(value);
                 ctx.onClose()
             }}
