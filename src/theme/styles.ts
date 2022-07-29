@@ -10,6 +10,27 @@ const styles = {
             position: 'relative',
             bgColor: 'white',
         },
+        input: {
+            _focus: {
+                outline: 'none',
+            },
+        },
+
+        a: {
+            _focus: {
+                outline: 'none',
+            },
+        },
+
+        button: {
+            _focus: {
+                outline: 'none',
+            },
+        },
+
+        'img[src = ""], img: not([src])': {
+            opacity: 0,
+        },
     },
 }
 

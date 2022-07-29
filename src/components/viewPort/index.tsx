@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { CSSProperties, memo, useMemo, useRef } from "react";
+import { memo, useMemo, useRef } from "react";
 import { useInViewport } from "react-in-viewport";
 
 export const ViewPort = memo((props: any) => {
